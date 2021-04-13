@@ -5,6 +5,23 @@ import csv
 import numpy
 
 
+# set up the lists for the text of numbers in English and the menu options
+EngNum = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"]
+menu_options = ["Import a new graph via csv file", "Output the adjacency list as a table", "Find MST usint algorithm 1", "Find MST usint algorithm 2", "Compare algorithms", "Save data to file in csv format", "Quit the Program"] 
+
+
+# to check which operation system is the user running this program on and clear the screen in the cell prompt
+def clear_screen():
+
+    # to check is the user using linux or mac. The os.name for lunux and mac is "posix".
+    if os.name == "posix":
+        _ = os.system("clear")
+    else:
+        # for other operation system, e.g. window.
+        _ = os.system("cls")
+
+
+
 #### FUNCTIONS MUST BE DEFINED FIRST
 
 def set_parameters():
@@ -52,12 +69,9 @@ def main():
         # show the welcome message/program information
         print(program_info)
 
-        # show menu options in console
-        print("1: Set parameters")
-        print("2: Calculate data")
-        print("3: Display data in table")
-        print("4: Display data as graph")
-        print("q: quit program")
+        # print the menu through the list "menu_options" using for loop
+        for i in range(0,7):
+            print([i+1], menu_options[i])
 
         # get command from user
         user_command = input("\nenter command: ")
