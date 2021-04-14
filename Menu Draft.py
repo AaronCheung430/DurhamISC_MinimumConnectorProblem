@@ -1,13 +1,24 @@
 # import modules
 import os
+import sys
 import time
 import csv
 import numpy
+import pandas
 
 
 # set up the lists for the text of numbers in English and the menu options
 EngNum = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"]
 menu_options = ["Import a new graph via csv file", "Output the adjacency list as a table", "Find MST usint algorithm 1", "Find MST usint algorithm 2", "Compare algorithms", "Save data to file in csv format", "Quit the Program"] 
+
+class Edge():
+    def __init__(self):
+        pass
+
+class Graph():
+    def __init__(self):
+        pass
+
 
 
 # to check which operation system is the user running this program on and clear the screen in the cell prompt
