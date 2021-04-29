@@ -10,7 +10,7 @@ import os
 import sys
 import time
 import csv
-from util import alg_kruskal
+from util import alg_kruskal, alg_prim
 # import numpy
 # import pandas
 import matplotlib.pyplot as plt
@@ -19,14 +19,33 @@ import matplotlib.pyplot as plt
 # EngNum = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"]
 menu_options = ["Import a new graph via csv file", "Output the adjacency list as a table", "Find MST usint algorithm 1", "Find MST usint algorithm 2", "Compare algorithms", "Save data to file in csv format", "Quit the Program"] 
 
-class Edge():
-    def __init__(self):
-        pass
+# declare variables
+welcome_message = "Welcome to the Minimum Connector Problem. \nPlease type the number below."
+invalid_message = ""
 
-class Graph():
-    def __init__(self):
-        pass
+def menu(invalid_message=invalid_message):
 
+    # call clear_screen()
+    clear_screen()
+
+    # print the welcome message
+    print(welcome_message)
+    print(invalid_message)
+
+    # print the menu through the list "menu_options" using for loop
+    for i in range(len(menu_options)):
+        print([i+1], menu_options[i])
+	
+    option = -1 # used to store the user's choice
+	
+	# while option is less than 1 or greater than 7, loop
+	# used to validate user input
+    while option < 1 or option > 7:	
+		# get user's choice
+        option = int(input("\nEnter your choice: "))
+	
+    
+    return option
 
 
 # to check which operation system is the user running this program on and clear the screen in the cell prompt
@@ -65,60 +84,62 @@ def display_graph():
 # end of display_graph
 
 
+# ---------------------------------- Main Program ---------------------------------
 
 def main():
-    # code to be added soon
-    #### MAIN PROGRAM
 
-    # declare variables
-    program_info = "DUISC Python Example \nBasic Menu\n"
-    user_command = "nothing"
-    print(user_command, "testing")
-    print("hello")
-    # main loop: get input command from users and jump to required option
-    # code in this loop is repeated after every user command, until the user enters 'quit'
+    end_program = False # variable used to check if user wants to exit program
 
-    while (user_command != 'q'):
+    # loop until end_program is True
+    while not end_program:
+
+        # call menu function and get user's choice
+        option = menu()
         
-        
-        # clear the console using the system terminal command 'clear'
-        # note: this only works for Linux and macOS; a different command would be required for Windows
-        # os.system('clear')
+        if option == 1: # import data from csv
+            # adj_list = open_csv_file(read_file_path)
+            # print(adj_list)
 
-        # show the welcome message/program information
-        print(program_info)
-
-        # print the menu through the list "menu_options" using for loop
-        for i in range(0,7):
-            print([i+1], menu_options[i])
-
-        # get command from user
-        user_command = input("\nenter command: ")
-        
-        # check user command
-        if user_command=='1':
-            set_parameters()
+            print("CSV file imported successfully.")
             
-        elif user_command=='2':
-            calculate_data()
+        elif option == 2: # Calculate total sales for each employee
+            # total_sales = calc_total_sales(sales_data)
             
-        elif user_command == "3":
-            display_table()
+            # show total sales
+            print("Total Sales:",total_sales)
             
-        elif user_command == "4":
-            display_graph()
-        
-        else:
-            if user_command != "q":
-                print("Invalid command")
-                time.sleep(1)	
+        elif option == 3: # Calculate mean sales for each employee
+            # mean_sales = calc_mean_sales(total_sales)
 
-    # end of main loop: user has quit
-    print("quitting...");
-    print("program ended");
-    print("goodbye");
+            # show mean sales
+            print("Mean Sales:", [round(mean, 2) for mean in mean_sales])
+            
+        elif option == 4: # Create graph of monthly sales
+            print("option 4")
 
-    #### END OF MAIN PROGRAM
+        elif option == 5: # Create graph of monthly sales
+            print("option 5")
+
+        elif option == 6: # Create graph of monthly sales
+            print("option 6")
+            
+        else: # option 7 - exit in controlled manner
+
+            # check if option is not 7 and update the variable
+            if option != 7:
+                invalid_message = "\nPlease trying again by entering a number between 1-7. \n"
+
+                # go back to the start of the loop, instead of running the following program
+                continue
+
+            # set end_program Boolean to True
+            end_program = True
+            
+            # output messages to user
+            print("Thank you for using this program")
+            print("Quitting Program...")
+
+        #### END OF MAIN PROGRAM
 
 
 if __name__ == "__main__":
