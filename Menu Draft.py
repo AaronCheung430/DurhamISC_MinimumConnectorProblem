@@ -1,14 +1,22 @@
-# import modules
+# DUISC IFY Computer Science with Extended Research (CSER)
+# Summative 2 - Minimum Connector Problem
+
+# Student No: 2595161
+# DUID: qwwk95
+# CLASS CODE: SFSCS_CSCPR
+
+# ------------------------------- Imported Packages -------------------------------
 import os
 import sys
 import time
 import csv
-import numpy
-import pandas
-
+from util import alg_kruskal
+# import numpy
+# import pandas
+import matplotlib.pyplot as plt
 
 # set up the lists for the text of numbers in English and the menu options
-EngNum = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"]
+# EngNum = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"]
 menu_options = ["Import a new graph via csv file", "Output the adjacency list as a table", "Find MST usint algorithm 1", "Find MST usint algorithm 2", "Compare algorithms", "Save data to file in csv format", "Quit the Program"] 
 
 class Edge():
