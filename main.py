@@ -6,12 +6,12 @@
 # CLASS CODE: SFSCS_CSCPR
 
 # ------------------------------- Imported Packages -------------------------------
-import os
-import sys
-import time
-import csv
-# from util import config as cfg
+# import os
+# import time
+# import csv
+from util import config as cfg
 from util import start as strt
+from util.adj_list import open_csv_file, output_adj_list_table
 # from util import alg_kruskal, alg_prim
 # import numpy
 # import pandas
@@ -31,13 +31,14 @@ def main():
         option = strt.menu()
 
         if option == 1: # import data from csv
-            # adj_list = open_csv_file(read_file_path)
-            # print(adj_list)
-
-            print("CSV file imported successfully.")
+            adjac_list = open_csv_file(cfg.read_file_path)
+            cfg.time_animation(3, "CSV file imported successfully.")
 
         elif option == 2: # Calculate total sales for each employee
             print("option 2")
+            output_adj = output_adj_list_table(adjac_list)
+            print(output_adj)
+
 
         elif option == 3: # Calculate mean sales for each employee
             print("option 3")

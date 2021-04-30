@@ -1,4 +1,5 @@
 # menu.py
+# functions for menu() and restart() after iterate once in the main loop
 
 import os
 import util.config as cfg
@@ -13,7 +14,7 @@ def menu():
     while option < 1 or option > len(cfg.menu_options):
 
         # call clear_screen()
-        # clear_screen()
+        # cfg.clear_screen()
 
         # print the welcome message
         print(cfg.welcome_message)
@@ -37,12 +38,7 @@ def menu():
     return option
 
 
-# to check which operation system is the user running this program on and clear the screen in the cell prompt
-def clear_screen():
+# to to ask the user whether they are going to continue the program
+def restart():
 
-    # to check is the user using linux or mac. The os.name for lunux and mac is "posix".
-    if os.name == "posix":
-        _ = os.system("clear")
-    else:
-        # for other operation system, e.g. window.
-        _ = os.system("cls")
+    pass

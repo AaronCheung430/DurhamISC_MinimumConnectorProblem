@@ -23,15 +23,15 @@ graph = {
         }
 
 
- 
+
 #初始化并查集，使每一个节点单独存在于一个集合中
 def init_set(graph):
     set_dic = dict()
     for i,j in zip(range(len(graph)),graph.keys()):
         set_dic[i] = {j}
-    
+
     return set_dic
- 
+
 #将边及权重以三元组 "（始点，终点，权重）"的形式存放在数列中，
 #并按照权重大小进行由低到高排序
 def init_distance(graph):
@@ -42,26 +42,26 @@ def init_distance(graph):
                 distance_list.append((i,j,graph[i][j]))
     distance_list.sort(key = lambda x:x[-1],reverse = False)
     return distance_list
- 
 
-# nodes = init_set(graph)
-# edges = init_distance(graph)
-# choice = []#以选取边的列表,choice:选择
- 
-# #判断边的首尾两顶点是否在同一个集合内，若不在，则构不成环，
-# #将此边放入choice列表中
-# for edge in edges:
-#     for i in nodes.keys():
-#         if edge[0] in nodes[i]:
-#             first = i
-#         if edge[1] in nodes[i]:
-#             second = i
-            
-#     if first != second:
-#         nodes[first] = nodes[first] | nodes[second]
-#         del nodes[second]
-#         choice.append(edge)
-        
-# print(choice)
 
-# print(sum([x[-1] for x in choice]))
+nodes = init_set(graph)
+edges = init_distance(graph)
+choice = []#以选取边的列表,choice:选择
+
+#判断边的首尾两顶点是否在同一个集合内，若不在，则构不成环，
+#将此边放入choice列表中
+for edge in edges:
+    for i in nodes.keys():
+        if edge[0] in nodes[i]:
+            first = i
+        if edge[1] in nodes[i]:
+            second = i
+
+    if first != second:
+        nodes[first] = nodes[first] | nodes[second]
+        del nodes[second]
+        choice.append(edge)
+
+print(choice)
+
+print(sum([x[-1] for x in choice]))
