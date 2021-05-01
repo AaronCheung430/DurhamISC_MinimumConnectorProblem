@@ -30,26 +30,28 @@ def main():
         # call menu function and get user's choice
         option = strt.menu()
 
-        if option == 1: # import data from csv
+        if option == 1: # import a graph from csv
             adjac_list = open_csv_file(cfg.read_file_path)
+            cfg.clear_screen()
             cfg.time_animation(3, "CSV file imported successfully.")
+            cfg.countdown(4)
 
-        elif option == 2: # Calculate total sales for each employee
-            print("option 2")
+        elif option == 2: # output the adjacency list as a table
             output_adj = output_adj_list_table(adjac_list)
             print(output_adj)
 
 
-        elif option == 3: # Calculate mean sales for each employee
+        elif option == 3: # find MST using kruskal's algorithm
+
             print("option 3")
 
-        elif option == 4: # Create graph of monthly sales
+        elif option == 4: # find MST using prim's algorithm
             print("option 4")
 
-        elif option == 5: # Create graph of monthly sales
+        elif option == 5: # compare algorithm running time
             print("option 5")
 
-        elif option == 6: # Create graph of monthly sales
+        elif option == 6: # save data to csv file
             print("option 6")
 
         else: # option 7 - exit in controlled manner
