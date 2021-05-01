@@ -16,6 +16,8 @@ welcome_message = "Welcome to the Minimum Connector Problem. \nPlease type the n
 invalid_message = ""
 
 read_file_path = "data/test_graph.csv" # file path for file to be read
+# read_file_path = "data/C1_V5_E8.csv"
+
 
 # to check which operation system is the user running this program on and clear the screen in the cell prompt
 def clear_screen():

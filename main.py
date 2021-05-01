@@ -34,6 +34,7 @@ def main():
             adjac_list = open_csv_file(cfg.read_file_path)
             cfg.clear_screen()
             cfg.time_animation(3, "CSV file imported successfully.")
+            print(adjac_list)
             cfg.countdown(4)
 
         elif option == 2: # output the adjacency list as a table

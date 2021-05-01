@@ -12,7 +12,7 @@
 #             "I": {"D": 23, "E": 15, "G": 28, "H": 17}
 #         }
 
-
+graph = {'A': {'B': '4', 'C': '4', 'D': '6', 'E': '6'}, 'B': {'A': '4', 'C': '2'}, 'C': {'B': '2', 'A': '4', 'D': '8'}, 'D': {'C': '8', 'A': '6', 'E': '9'}, 'E': {'A': '6', 'D': '9'}}
 
 #初始化并查集，使每一个节点单独存在于一个集合中
 def init_set(graph):
@@ -29,7 +29,7 @@ def init_distance(graph):
     for i in graph.keys():
         for j in graph[i].keys():
             if i != j:
-                distance_list.append((i,j,graph[i][j]))
+                distance_list.append((i,j,int(graph[i][j])))
     distance_list.sort(key = lambda x:x[-1],reverse = False)
     return distance_list
 
