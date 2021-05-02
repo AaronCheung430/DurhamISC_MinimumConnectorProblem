@@ -38,3 +38,9 @@ def output_adj_list_table(database):
 	# for key, value in database.items():
 	# 	end_node, weight = value
 	# 	print("{:<8} {:<15} {:<10}".format(key, end_node, weight))
+
+# to save data to file in csv format
+def save_csv():
+
+
+	pass

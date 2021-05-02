@@ -1,3 +1,8 @@
+# alg_kruskal.py
+# find MST using Kruskal Algorithm
+
+import time
+import queue
 
 
 graph = {
@@ -14,6 +19,7 @@ graph = {
 
 # graph = {'A': {'B': '4', 'C': '4', 'D': '6', 'E': '6'}, 'B': {'A': '4', 'C': '2'}, 'C': {'B': '2', 'A': '4', 'D': '8'}, 'D': {'C': '8', 'A': '6', 'E': '9'}, 'E': {'A': '6', 'D': '9'}}
 
+#
 #初始化并查集，使每一个节点单独存在于一个集合中
 def init_set(graph):
     set_dic = dict()
@@ -34,55 +40,71 @@ def init_distance(graph):
     return distance_list
 
 
-nodes = init_set(graph)
-edges = init_distance(graph)
-choice = []#以选取边的列表,choice:选择
+def kruskal(graph):
 
-# #判断边的首尾两顶点是否在同一个集合内，若不在，则构不成环，
-# #将此边放入choice列表中
-# for edge in edges:
-#     for i in nodes.keys():
-#         if edge[0] in nodes[i]:
-#             start_node = i
-#         if edge[1] in nodes[i]:
-#             end_node = i
+    t2 = time.perf_counter()
+    nodes = init_set(graph)
+    edges = init_distance(graph)
+    choice = []#以选取边的列表,choice:选择
 
-#     if start_node != end_node:
-#         nodes[start_node] = nodes[start_node] | nodes[end_node]
-#         del nodes[end_node]
-#         choice.append(edge)
+    #判断边的首尾两顶点是否在同一个集合内，若不在，则构不成环，
+    #将此边放入choice列表中
+    for edge in edges:
+        for i in nodes.keys():
+            if edge[0] in nodes[i]:
+                start_node = i
+            if edge[1] in nodes[i]:
+                end_node = i
 
-# print(choice)
+        if start_node != end_node:
+            nodes[start_node] = nodes[start_node] | nodes[end_node]
+            del nodes[end_node]
+            choice.append(edge)
 
-# print(sum([x[-1] for x in choice]))
+    total_weight = sum([x[-1] for x in choice])
+
+    num = time.perf_counter() - t2
+    output = f"{num:.15f}"
+
+    return choice, total_weight, output
 
 
-# second way of doing it
-# import queue
-# que = queue.PriorityQueue()
+# second way of doing it, by using queue
+def kruskal_queue():
 
-# for i in list(graph.keys()):
-#     for next_to, cost in graph[i].items():
-#         que.put((int(cost), i, next_to))
+    t1 = time.time()
+    que = queue.PriorityQueue()
+    nodes = init_set(graph)
+    choice = []
 
-# nodes = init_set(graph)
+    #
+    for i in list(graph.keys()):
+        for next_to, cost in graph[i].items():
+            que.put((int(cost), i, next_to))
 
-# while not que.empty():
-#     edges = que.get()
-#     cost, frm, to = edges
+    #
+    while not que.empty():
+        edge = que.get()
+        cost, frm, to = edge
 
-#     for i in nodes.keys():
-#         if edges[1] in nodes[i]:
-#             start_node = i
-#         if edges[2] in nodes[i]:
-#             end_node = i
+        #
+        for i in nodes.keys():
+            if edge[1] in nodes[i]:
+                start_node = i
+            if edge[2] in nodes[i]:
+                end_node = i
 
-#     if start_node != end_node:
-#         nodes[start_node] = nodes[start_node] | nodes[end_node]
-#         del nodes[end_node]
-#         new_edge = (frm, to, cost)
-#         choice.append(new_edge)
+        #
+        if start_node != end_node:
+            nodes[start_node] = nodes[start_node] | nodes[end_node]
+            del nodes[end_node]
+            new_edge = (frm, to, cost)
+            choice.append(new_edge)
 
-# print(choice)
+    print(choice)
 
-# print(sum([x[-1] for x in choice]))
+    print(sum([x[-1] for x in choice]))
+
+    print("Queue time:",time.time() - t1)
+
+kruskal(graph)

@@ -12,7 +12,8 @@
 from util import config as cfg
 from util import start as strt
 from util.adj_list import open_csv_file, output_adj_list_table
-# from util import alg_kruskal, alg_prim
+from util import alg_kruskal
+# , alg_prim
 # import numpy
 # import pandas
 # import matplotlib.pyplot as plt
@@ -43,8 +44,10 @@ def main():
 
 
         elif option == 3: # find MST using kruskal's algorithm
-
-            print("option 3")
+            k_mst, k_weight, k_time = alg_kruskal.kruskal(adjac_list)
+            print("The MST is", k_mst)
+            print("Weight of MST is", k_weight)
+            print("Computation time is", k_time)
 
         elif option == 4: # find MST using prim's algorithm
             print("option 4")
