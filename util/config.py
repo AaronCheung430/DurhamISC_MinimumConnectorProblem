@@ -18,6 +18,13 @@ invalid_message = ""
 read_file_path = "data/test_graph.csv" # file path for file to be read
 # read_file_path = "data/C1_V5_E8.csv"
 
+# to display message and return value back to the caller code, after check first matrix is empty in the main program
+def check_first_matrix():
+    global invalid_message
+    clear_screen()
+    invalid_message = f"\nPlease select '[1] {menu_options[0]}' to import a new graph first. \n"
+    print(f"Your graph is empty. \nPlease return to the main menu and choose '[1] {menu_options[0]}' to import a new graph and come back later. \n")
+    countdown(5)
 
 # to check which operation system is the user running this program on and clear the screen in the cell prompt
 def clear_screen():

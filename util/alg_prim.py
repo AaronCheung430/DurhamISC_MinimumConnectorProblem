@@ -2,7 +2,7 @@
 import queue
 import time
 
-def prim(graph):
+def prim_queue(graph):
 
     t1 = time.perf_counter()
 
@@ -41,7 +41,7 @@ def prim(graph):
     return mst, total_weight
 
 
-def prim_queue(graph):
+def prim(graph):
 
     t2 = time.perf_counter()
     mst = []

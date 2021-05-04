@@ -4,7 +4,7 @@
 import os
 import util.config as cfg
 
-
+# to show menu options
 def menu():
 
     option = -1 # used to store the user's choice
@@ -37,8 +37,3 @@ def menu():
 
     return option
 
-
-# to to ask the user whether they are going to continue the program
-def restart():
-
-    pass
