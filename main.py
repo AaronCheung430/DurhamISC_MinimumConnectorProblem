@@ -41,7 +41,7 @@ def main():
 
         elif option == 2: # output the adjacency list as a table
             if adjac_list == {}:
-                cfg.check_first_matrix()
+                cfg.check_adjact_list()
                 continue
             else:
                 output_adj = output_adj_list_table(adjac_list)
@@ -49,7 +49,7 @@ def main():
 
         elif option == 3: # find MST using kruskal's algorithm
             if adjac_list == {}:
-                cfg.check_first_matrix()
+                cfg.check_adjact_list()
                 continue
             else:
                 k_mst, k_weight, k_time = alg_kruskal.kruskal(adjac_list)
@@ -60,7 +60,7 @@ def main():
 
         elif option == 4: # find MST using prim's algorithm
             if adjac_list == {}:
-                cfg.check_first_matrix()
+                cfg.check_adjact_list()
                 continue
             else:
                 print("option 4")

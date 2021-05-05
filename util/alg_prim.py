@@ -1,7 +1,10 @@
-# another file
-import queue
-import time
+# algo_prim.py
+# find MST using Prim's Algorithm
 
+import time
+import queue
+
+#
 def prim_queue(graph):
 
     t1 = time.perf_counter()

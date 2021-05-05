@@ -1,5 +1,5 @@
 # alg_kruskal.py
-# find MST using Kruskal Algorithm
+# find MST using Kruskal's Algorithm
 
 import time
 import queue
@@ -19,8 +19,7 @@ graph = {
 
 # graph = {'A': {'B': '4', 'C': '4', 'D': '6', 'E': '6'}, 'B': {'A': '4', 'C': '2'}, 'C': {'B': '2', 'A': '4', 'D': '8'}, 'D': {'C': '8', 'A': '6', 'E': '9'}, 'E': {'A': '6', 'D': '9'}}
 
-#
-#初始化并查集，使每一个节点单独存在于一个集合中
+# initalise dict, put all nodes into dict
 def init_set(graph):
     set_dic = dict()
     for i,j in zip(range(len(graph)),graph.keys()):
@@ -28,6 +27,7 @@ def init_set(graph):
 
     return set_dic
 
+# store (start_node. end_node, weight) into tuple and all inside the list
 #将边及权重以三元组 "（始点，终点，权重）"的形式存放在数列中，
 #并按照权重大小进行由低到高排序
 def init_distance(graph):
@@ -36,7 +36,7 @@ def init_distance(graph):
         for j in graph[i].keys():
             if i != j:
                 distance_list.append((i,j,int(graph[i][j])))
-    distance_list.sort(key = lambda x:x[-1],reverse = False)
+    distance_list.sort(key = lambda x:x[-1],reverse = False)    # sort the list in ascending order
     return distance_list
 
 

@@ -18,8 +18,8 @@ invalid_message = ""
 read_file_path = "data/test_graph.csv" # file path for file to be read
 # read_file_path = "data/C1_V5_E8.csv"
 
-# to display message and return value back to the caller code, after check first matrix is empty in the main program
-def check_first_matrix():
+# to display invalid message, after check is graph exist in the main program
+def check_adjact_list():
     global invalid_message
     clear_screen()
     invalid_message = f"\nPlease select '[1] {menu_options[0]}' to import a new graph first. \n"
