@@ -30,7 +30,7 @@ def menu():
 
             # check if option is not 7 and update the variable
             if option < 1 or option > len(cfg.menu_options):
-                cfg.invalid_message = "\nPlease trying again by entering a number between 1-7. \n"
+                cfg.invalid_message = f"\nPlease trying again by entering a number between 1-{len(cfg.menu_options)}. \n"
 
         except ValueError:
             cfg.invalid_message = f"\n{cfg.valueError_message}"

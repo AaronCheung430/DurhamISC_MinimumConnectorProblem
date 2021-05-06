@@ -35,9 +35,10 @@ def clear_screen():
 
 # to preform the time delay animation
 def time_animation(t, message="Done!      "):
+
     for i in range(t):
         for frame in r'-\|/-\|/':
-            # Back up one character then print our next frame in the animation
+            # back up one character then print our next frame in the animation
             print('\rloading ', frame, sep='', end='', flush=True)
             sleep(0.125)
 

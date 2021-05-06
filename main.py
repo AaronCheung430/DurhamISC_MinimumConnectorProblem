@@ -6,9 +6,7 @@
 # CLASS CODE: SFSCS_CSCPR
 
 # ------------------------------- Imported Packages -------------------------------
-# import os
-# import time
-# import csv
+
 from util import config as cfg
 from util import start as strt
 from util.adj_list import open_csv_file, output_adj_list_table
