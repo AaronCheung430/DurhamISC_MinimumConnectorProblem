@@ -20,31 +20,27 @@ graph = {
 # graph = {'A': {'B': '4', 'C': '4', 'D': '6', 'E': '6'}, 'B': {'A': '4', 'C': '2'}, 'C': {'B': '2', 'A': '4', 'D': '8'}, 'D': {'C': '8', 'A': '6', 'E': '9'}, 'E': {'A': '6', 'D': '9'}}
 
 # initalise dict, put all nodes into dict
-def init_set(graph):
-    set_dic = dict()
+def init_nodes(graph):
+    nodes_dic = dict()
     for i,j in zip(range(len(graph)),graph.keys()):
-        set_dic[i] = {j}
+        nodes_dic[i] = {j}
+    return nodes_dic
 
-    return set_dic
-
-# store (start_node. end_node, weight) into tuple and all inside the list
-#将边及权重以三元组 "（始点，终点，权重）"的形式存放在数列中，
-#并按照权重大小进行由低到高排序
-def init_distance(graph):
-    distance_list = []
+# store (start_node, end_node, weight) into tuple and all inside the list
+def init_weight(graph):
+    edge_list = []
     for i in graph.keys():
         for j in graph[i].keys():
             if i != j:
-                distance_list.append((i,j,int(graph[i][j])))
-    distance_list.sort(key = lambda x:x[-1],reverse = False)    # sort the list in ascending order
-    return distance_list
-
+                edge_list.append((i,j,int(graph[i][j])))
+    edge_list.sort(key = lambda x:x[-1],reverse = False)    # sort the list in ascending order
+    return edge_list
 
 def kruskal(graph):
 
-    t2 = time.perf_counter()
-    nodes = init_set(graph)
-    edges = init_distance(graph)
+    k_time = time.perf_counter()
+    nodes = init_nodes(graph)
+    edges = init_weight(graph)
     choice = []#以选取边的列表,choice:选择
 
     #判断边的首尾两顶点是否在同一个集合内，若不在，则构不成环，
@@ -63,7 +59,7 @@ def kruskal(graph):
 
     total_weight = sum([x[-1] for x in choice])
 
-    num = time.perf_counter() - t2
+    num = time.perf_counter() - k_time
     output = f"{num:.15f}"
 
     return choice, total_weight, output
@@ -72,7 +68,7 @@ def kruskal(graph):
 # second way of doing it, by using queue
 def kruskal_queue():
 
-    t1 = time.time()
+    k_queue_time = time.time()
     que = queue.PriorityQueue()
     nodes = init_set(graph)
     choice = []
@@ -105,6 +101,6 @@ def kruskal_queue():
 
     print(sum([x[-1] for x in choice]))
 
-    print("Queue time:",time.time() - t1)
+    print("Queue time:",time.time() - k_queue_time)
 
 kruskal(graph)

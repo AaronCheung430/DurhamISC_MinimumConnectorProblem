@@ -1,0 +1,5 @@
+# compare.py
+#
+
+import numpy
+
