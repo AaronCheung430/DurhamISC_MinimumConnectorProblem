@@ -55,6 +55,7 @@ def main():
                 print("The MST is", k_mst)
                 print("Weight of MST is", k_weight)
                 print("Computation time is", k_time)
+                input("\nEnter to return to menu...") # pause the program to show graph
 
         elif option == 4: # find MST using prim's algorithm
             if adjac_list == {}:
