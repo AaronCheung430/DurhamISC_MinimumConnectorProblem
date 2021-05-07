@@ -10,10 +10,8 @@
 from util import config as cfg
 from util import start as strt
 from util.adj_list import open_csv_file, output_adj_list_table
-from util import alg_kruskal
-# , alg_prim
-# import numpy
-# import pandas
+from util import alg_kruskal, alg_prim
+# from util import compare
 # import matplotlib.pyplot as plt
 
 
@@ -55,16 +53,22 @@ def main():
                 print("The MST is", k_mst)
                 print("Weight of MST is", k_weight)
                 print("Computation time is", k_time)
-                input("\nEnter to return to menu...") # pause the program to show graph
+                input("\nEnter to return to menu...") # pause the program
 
         elif option == 4: # find MST using prim's algorithm
             if adjac_list == {}:
                 cfg.check_adjact_list()
                 continue
             else:
-                print("option 4")
+                p_mst, p_weight, p_time = alg_prim.prim(adjac_list)
+                print("Here are the results using Prim's Algorithm:")
+                print("The MST is", p_mst)
+                print("Weight of MST is", p_weight)
+                print("Computation time is", p_time)
+                input("\nEnter to return to menu...") # pause the program
 
         elif option == 5: # compare algorithm running time
+
             print("option 5")
 
         elif option == 6: # save data to csv file

@@ -18,7 +18,7 @@ def prim(graph):
     def prim_weight(vertex):
         for next_to, weight in graph[vertex].items():
             if next_to not in seen_egdes:
-                weight_list.append((starting_vertex,next_to,int(weight)))
+                weight_list.append((vertex,next_to,int(weight)))
         weight_list.sort(key = lambda x:x[-1],reverse = False)
 
     prim_weight(starting_vertex)    # call function to only add edges that connected to this node
@@ -47,75 +47,38 @@ def prim(graph):
 # another prim's algorithm to find mst, by using queue
 def prim_queue(graph):
 
-    t1 = time.perf_counter()    # set timer
+    p_queue_s_time = time.perf_counter()    # set timer
+    que = queue.PriorityQueue() # set variable to priority queue
+    starting_vertex = list(graph.keys())[0] # set starting_vertex to the first node
+    mst = []    # set up mst as a empty list
+    seen_egdes = set() # set up seen_egdes as a empty set
+    total_weight = 0    # set variable to 0
 
-    que = queue.PriorityQueue()
-    mst = []
-    visited = set()
-    total_weight = 0
-
-    starting_vertex = list(graph.keys())[0]
-
+    # to store edges that connect with the firat vertex into priority queue, and it will be sorted
     for next_to, weight in graph[starting_vertex].items():
-        if next_to not in visited:
+        if next_to not in seen_egdes:
             que.put((int(weight), starting_vertex, next_to))
 
+    # loop when que is not empty
     while not que.empty():
-        edge = que.get()
-        weight, frm, to = edge
-        new_edge = (frm, to, weight)
+        edge = que.get()    # get the first element from que and store it to variable
+        weight, frm, to = edge  # unpack edge
+        new_edge = (frm, to, weight) # format new_edge
 
-        if to in visited:
-            continue
+        if to in seen_egdes:    # check is to in seen_edges
+            continue    # start the loop again directly
 
-        visited.add(frm)
-        visited.add(to)
-        mst.append(new_edge)
-        total_weight += weight
+        seen_egdes.add(frm) # add node to set
+        seen_egdes.add(to)  # add node to set
+        mst.append(new_edge)    # append corresponding edge to list
+        total_weight += weight  # add weight into total_weight
 
+        # to add edges that connect with the corresponding vertex into priority queue, and it will be sorted
         for next_to, weight in graph[to].items():
-            if next_to not in visited:
+            if next_to not in seen_egdes:
                 que.put((int(weight), to, next_to))
 
-    num = time.perf_counter() - t1
-    output = f"{num:.15f}"
-    print("Queue Time:",output)
+    p_queue_r_time = time.perf_counter() - p_queue_s_time
+    p_queue_f_time = f"{p_queue_r_time:.15f}"
 
-    return mst, total_weight
-
-
-
-
-
-
-if __name__ == '__main__':
-    # Undirected weighted graph
-    arg_graph = {
-            "A": {"B": 7, "C": 9},
-            "B": {"A": 7, "C": 6, "D": 19, "F": 14},
-            "C": {"A": 9, "B": 6, "D": 11, "E": 14},
-            "D": {"B": 19, "C": 11, "E": 10, "F": 13, "G": 27, "I": 23},
-            "E": {"C": 14, "D": 10, "I": 15},
-            "F": {"B": 14, "D": 13, "G": 25, "H": 16},
-            "G": {"D": 27, "F": 25, "H": 20, "I": 28},
-            "H": {"F": 16, "G": 20, "I": 17},
-            "I": {"D": 23, "E": 15, "G": 28, "H": 17}
-        }
-    # arg_graph = {'A': {'B': 4, 'C': 4, 'D': 6, 'E': 6}, 'B': {'A': 4, 'C': 2}, 'C': {'B': 2, 'A': 4, 'D': 8}, 'D': {'C': 8, 'A': 6, 'E': 9}, 'E': {'A': 6, 'D': 9}}
-    # arg_graph = {'A': {'B': '4', 'C': '4', 'D': '6', 'E': '6'}, 'B': {'A': '4', 'C': '2'}, 'C': {'B': '2', 'A': '4', 'D': '8'}, 'D': {'C': '8', 'A': '6', 'E': '9'}, 'E': {'A': '6', 'D': '9'}}
-
-    # mst_path, total_weight = prim_queue(arg_graph)
-    # print(mst_path)
-    # print(total_weight)
-
-    mst_path, total_weight, p_time = prim(arg_graph)
-    print(mst_path)
-    print(total_weight)
-    print("Computation time is", p_time)
-
-    # mst_path, total_weight = prim_queue(arg_graph)
-    # print(mst_path)
-    # print(total_weight)
-
-    # pause the program to show graph
-    input("enter to return to menu...")
+    return mst, total_weight, p_queue_f_time    # return mst, total weight, and running time

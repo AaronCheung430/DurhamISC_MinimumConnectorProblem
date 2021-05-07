@@ -3,7 +3,9 @@
 
 import numpy as np
 import config as cfg
-import alg_kruskal
+from alg_kruskal import kruskal
+
+maximum_weight = 1001
 
 def create_completed_graph(nodes):
 
@@ -17,7 +19,7 @@ def create_completed_graph(nodes):
         end_nodes_list.pop(starting_node)   # remove the self value in the list
 
         for end_node in end_nodes_list: # iterate through each elements in the list
-            weight = np.random.randint(1, 1001)  # random generate an integer for weight
+            weight = np.random.randint(1, maximum_weight)  # random generate an integer for weight
             if new_complete_graph == {}:    # check is this the first starting_node
                 end_nodes_dict[end_node] = weight   # put key as end_node, and value as weight into dict
             else:
@@ -29,18 +31,25 @@ def create_completed_graph(nodes):
 
         new_complete_graph[starting_node] = end_nodes_dict
 
-    # print(new_complete_graph)
+    print(new_complete_graph)
     return new_complete_graph
 
 # cfg.time_animation(3)
 # create_completed_graph(5)
-k_mst, k_weight, k_time = alg_kruskal.kruskal(create_completed_graph(100))
+k_mst, k_weight, k_time = kruskal(create_completed_graph(5))
 print("Here are the results using kruskal's Algorithm:")
 print("The MST is", k_mst)
 print("Weight of MST is", k_weight)
 print("Computation time is", k_time)
-# create_completed_graph(10)
+create_completed_graph(10)
 # create_completed_graph(100)
 # create_completed_graph(500)
 # create_completed_graph(1000)
 # print("hi")
+
+def compare_nodes():
+
+
+    k_mst, k_weight, k_time = alg_kruskal.kruskal(create_completed_graph(10))
+
+    pass

@@ -49,7 +49,6 @@ def kruskal(graph):
 
     return mst, total_weight, k_f_time   # return mst, total weight, and running time
 
-
 # another kruskal's algorithm to find mst, by using queue
 def kruskal_queue(graph):
 
