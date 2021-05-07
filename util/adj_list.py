@@ -31,7 +31,7 @@ def open_csv_file(file_path):
 
 	return database
 
-# to output both adjacency list and adjacency matrix
+# to output both adjacency list and adjacency matrix as a table
 def output_adj_list_table(database):
 
 	graph = {}	# set up dict
