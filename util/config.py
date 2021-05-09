@@ -15,7 +15,7 @@ maximum_weight = 1001
 
 # file path for file to be read and write
 read_file_path = "data/test_graph.csv"
-write_file_path = "data/comparison_graph.csv"
+write_file_path = "data/graphs_data.csv"
 
 # to display invalid message, after check is graph exist in the main program
 def check_adjact_list(message = f"'[1] {menu_options[0]}' to import a new graph", graph_message = "graph"):

@@ -23,14 +23,11 @@ def create_completed_graph(nodes):
 
         for end_node in end_nodes_list: # iterate through each elements in the list
             weight = np.random.randint(1, cfg.maximum_weight)  # random generate an integer for weight
-            if new_complete_graph == {}:    # check is this the first starting_node
-                end_nodes_dict[end_node] = weight   # put key as end_node, and value as weight into dict
+            if end_node in new_complete_graph: # check is edge exist
+                if starting_node in new_complete_graph[end_node].keys():    # check is starting node exist in previous nodes
+                    end_nodes_dict[end_node] = new_complete_graph[end_node][starting_node]  # add the same weight to the corresponding end_node
             else:
-                if end_node in new_complete_graph: # iterate through each element in dict
-                    if starting_node in new_complete_graph[end_node].keys():    # check is starting node exist in previous nodes
-                        end_nodes_dict[end_node] = new_complete_graph[end_node][starting_node]  # add the same weight to the corresponding end_node
-                else:
-                    end_nodes_dict[end_node] = weight   # add the random weight to the end_node
+                end_nodes_dict[end_node] = weight   # add the random weight to the end_node
 
         new_complete_graph[starting_node] = end_nodes_dict
 
