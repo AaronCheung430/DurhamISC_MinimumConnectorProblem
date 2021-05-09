@@ -11,7 +11,7 @@ from util import config as cfg
 from util import start as strt
 from util.adj_list import open_csv_file, output_adj_list_table, save_csv
 from util import alg_kruskal, alg_prim
-# from util import compare
+from util import compare
 # import matplotlib.pyplot as plt
 
 
@@ -77,14 +77,20 @@ def main():
                 input("\nEnter to return to menu...") # pause the program
 
         elif option == 5: # compare algorithm running time
+            compared_csv = compare.compare()
 
+
+            save_csv_list = save_csv_list + compared_csv
             print("option 5, compare")
 
         elif option == 6: # save data to csv file
-
-            print(save_csv_list)
-            save_csv(cfg.write_file_path, save_csv_list)
-            cfg.time_animation(3, "CSV file created successfully.")
+            if save_csv_list == []:
+                cfg.check_adjact_list("[3-5] to find MST of the graph", "MST")
+                continue
+            else:
+                print(save_csv_list)
+                save_csv(cfg.write_file_path, save_csv_list)
+                cfg.time_animation(3, "CSV file created successfully.")
 
         else: # option 7 - exit in controlled manner
 

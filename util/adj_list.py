@@ -3,7 +3,6 @@
 # convert nested dict to edge list
 
 import csv
-# import util.config as cfg
 import pandas as pd
 
 # function which will open the csv file and read in its values and return a list containing each record as a dictionary
@@ -63,22 +62,3 @@ def save_csv(file_path, save_csv_list):
 		writer = csv.DictWriter(csv_file, fieldnames)
 		writer.writeheader()
 		writer.writerows(save_csv_list)
-
-
-# save_csv("../data/test_final.csv")
-
-
-
-
-# database = {
-#             "A": {"B": 7, "C": 9},
-#             "B": {"A": 7, "C": 6, "D": 19, "F": 14},
-#             "C": {"A": 9, "B": 6, "D": 11, "E": 14},
-#             "D": {"B": 19, "C": 11, "E": 10, "F": 13, "G": 27, "I": 23},
-#             "E": {"C": 14, "D": 10, "I": 15},
-#             "F": {"B": 14, "D": 13, "G": 25, "H": 16},
-#             "G": {"D": 27, "F": 25, "H": 20, "I": 28},
-#             "H": {"F": 16, "G": 20, "I": 17},
-#             "I": {"D": 23, "E": 15, "G": 28, "H": 17}
-#         }
-# output_adj_list_table(database)
