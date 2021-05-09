@@ -60,7 +60,7 @@ def output_adj_list_table(database):
 # to save data to file in csv format
 def save_csv(file_path):
 
-	fieldnames = ["Algorithm", "Numbers of Nodes", "Numbers of Edges", "Running Time", "Path Found", "Minimal Weight"]
+	fieldnames = ["Algorithm", "Numbers of Nodes", "Numbers of Edges", "Computation Time", "Path Found", "Minimal Weight"]
 
 	with open(file_path, 'w') as csv_file:
 		writer = csv.DictWriter(csv_file, fieldnames=fieldnames)

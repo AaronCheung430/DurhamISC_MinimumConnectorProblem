@@ -47,7 +47,9 @@ def kruskal(graph):
     k_r_time = time.perf_counter() - k_s_time   # calculate the running time
     k_f_time = f"{k_r_time:.15f}"   # format the running time
 
-    return mst, total_weight, k_f_time   # return mst, total weight, and running time
+    # return mst, total_weight, k_f_time   # return mst, total weight, and running time
+
+    return {"Algorithm": "Kruskal's Algorithm", "Number of Nodes": "", "Numbers of Edges": "", "Computation Time": k_f_time, "Path Found": mst, "Minimal Weight": total_weight}
 
 # another kruskal's algorithm to find mst, by using queue
 def kruskal_queue(graph):

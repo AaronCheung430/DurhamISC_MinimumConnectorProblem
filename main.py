@@ -48,11 +48,11 @@ def main():
                 cfg.check_adjact_list()
                 continue
             else:
-                k_mst, k_weight, k_time = alg_kruskal.kruskal(adjac_list)
-                print("Here are the results using kruskal's Algorithm:")
-                print("The MST is", k_mst)
-                print("Weight of MST is", k_weight)
-                print("Computation time is", k_time)
+                k_alg_dict = alg_kruskal.kruskal(adjac_list)
+                print(f"Here are the results using {k_alg_dict['Algorithm']}:")
+                print(f"The MST is {k_alg_dict['Path Found']}")
+                print(f"Weight of MST is {k_alg_dict['Minimal Weight']}")
+                print(f"Computation time is {k_alg_dict['Computation Time']}")
                 input("\nEnter to return to menu...") # pause the program
 
         elif option == 4: # find MST using prim's algorithm
