@@ -27,6 +27,8 @@ def kruskal(graph):
     k_s_time = time.perf_counter()  # set timer
     nodes = init_nodes(graph)   # find all nodes
     edges = init_weight(graph)  # find edge list
+    no_nodes = len(nodes)   # find number of nodes in graph
+    no_edges = int(len(edges)/2)    # find number of edges in graph
     mst = []    # set up mst as a empty list
 
     # determine whether the first and last nodes of the edge are in the same value of the key in dict
@@ -47,9 +49,8 @@ def kruskal(graph):
     k_r_time = time.perf_counter() - k_s_time   # calculate the running time
     k_f_time = f"{k_r_time:.15f}"   # format the running time
 
-    # return mst, total_weight, k_f_time   # return mst, total weight, and running time
-
-    return {"Algorithm": "Kruskal's Algorithm", "Number of Nodes": "", "Numbers of Edges": "", "Computation Time": k_f_time, "Path Found": mst, "Minimal Weight": total_weight}
+    # return a dict with algorithm info
+    return {"Algorithm": "Kruskal's Algorithm (without queue)", "Number of Nodes": no_nodes, "Numbers of Edges": no_edges, "Computation Time": k_f_time, "Path Found": mst, "Minimal Weight": total_weight}
 
 # another kruskal's algorithm to find mst, by using queue
 def kruskal_queue(graph):
@@ -63,6 +64,9 @@ def kruskal_queue(graph):
     for i in list(graph.keys()):
         for next_to, cost in graph[i].items():
             que.put((int(cost), i, next_to))
+
+    no_nodes = len(nodes)   # find number of nodes in graph
+    no_edges = int(que.qsize()/2)    # find number of edges in graph
 
     # when que is not empty, run the following code
     while not que.empty():
@@ -87,4 +91,5 @@ def kruskal_queue(graph):
     k_queue_r_time = time.perf_counter() - k_queue_s_time
     k_queue_f_time = f"{k_queue_r_time:.15f}"
 
-    return mst, total_weight, k_queue_f_time # return mst, total weight, and running time
+    # return a dict with algorithm info
+    return {"Algorithm": "Kruskal's Algorithm (with queue)", "Number of Nodes": no_nodes, "Numbers of Edges": no_edges, "Computation Time": k_queue_f_time, "Path Found": mst, "Minimal Weight": total_weight}

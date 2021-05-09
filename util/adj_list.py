@@ -35,6 +35,7 @@ def open_csv_file(file_path):
 def output_adj_list_table(database):
 
 	graph = {}	# set up dict
+
 	# change database to graph (dict list)
 	for key in database.keys():	# get the key of outer dict
 		end_nodes_list = []	# set up list
@@ -48,14 +49,10 @@ def output_adj_list_table(database):
 	adj_list = adj_list.transpose()	# transpose index and columns
 	adj_list = adj_list.to_string(header=False)	# show dataframe without index
 
-	print(adj_list)
-
 	adj_matrix = pd.DataFrame({key:pd.Series(value) for key, value in database.items()}).fillna(0)	# create dataframe using database
 	adj_matrix = adj_matrix.astype(int)	# convert everything to integers
 
-	print(adj_matrix)
-
-	return 	adj_matrix, adj_list	# return both adj_matrix, adj_list
+	return 	adj_list, adj_matrix	# return both adj_list, adj_matrix
 
 # to save data to file in csv format
 def save_csv(file_path):

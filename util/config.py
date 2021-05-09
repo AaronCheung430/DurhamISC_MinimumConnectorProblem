@@ -13,7 +13,7 @@ welcome_message = "Welcome to the Minimum Connector Problem. \nPlease type the n
 invalid_message = ""
 
 read_file_path = "data/test_graph.csv" # file path for file to be read
-# read_file_path = "data/C1_V5_E8.csv"
+write_file_path = "data/comparison_graph.csv"
 
 # to display invalid message, after check is graph exist in the main program
 def check_adjact_list():
