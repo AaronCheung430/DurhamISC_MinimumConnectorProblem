@@ -55,16 +55,14 @@ def output_adj_list_table(database):
 	return 	adj_list, adj_matrix	# return both adj_list, adj_matrix
 
 # to save data to file in csv format
-def save_csv(file_path):
+def save_csv(file_path, save_csv_list):
 
-	fieldnames = ["Algorithm", "Numbers of Nodes", "Numbers of Edges", "Computation Time", "Path Found", "Minimal Weight"]
+	fieldnames = save_csv_list[0].keys()
 
 	with open(file_path, 'w') as csv_file:
-		writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-
+		writer = csv.DictWriter(csv_file, fieldnames)
 		writer.writeheader()
-
-		# writer.writerow({})
+		writer.writerows(save_csv_list)
 
 
 # save_csv("../data/test_final.csv")

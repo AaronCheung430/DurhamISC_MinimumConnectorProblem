@@ -9,7 +9,7 @@
 
 from util import config as cfg
 from util import start as strt
-from util.adj_list import open_csv_file, output_adj_list_table
+from util.adj_list import open_csv_file, output_adj_list_table, save_csv
 from util import alg_kruskal, alg_prim
 # from util import compare
 # import matplotlib.pyplot as plt
@@ -21,6 +21,7 @@ def main():
 
     end_program = False # variable used to check if user wants to exit program
     adjac_list = {}
+    save_csv_list = []
 
     # loop until end_program is True
     while not end_program:
@@ -47,7 +48,7 @@ def main():
                 cfg.clear_screen()
                 print(f"Here is your adjacency matrix for your graph: \n{output_adj_matrix}")
                 input("\nEnter to return to menu...") # pause the program
-                cfg.countdown(4)
+                # cfg.countdown(4)
 
         elif option == 3: # find MST using kruskal's algorithm
             if adjac_list == {}:
@@ -55,6 +56,7 @@ def main():
                 continue
             else:
                 k_alg_dict = alg_kruskal.kruskal(adjac_list)    # call function, and return a dict
+                save_csv_list.append(k_alg_dict)
                 print(f"Here are the results using {k_alg_dict['Algorithm']}:") # print information about the algorithm
                 print(f"The MST is {k_alg_dict['Path Found']}")
                 print(f"Weight of MST is {k_alg_dict['Minimal Weight']}")
@@ -67,6 +69,7 @@ def main():
                 continue
             else:
                 p_alg_dict = alg_prim.prim(adjac_list)  # call function, and return a dict
+                save_csv_list.append(p_alg_dict)
                 print(f"Here are the results using {p_alg_dict['Algorithm']}:") # print information about the algorithm
                 print(f"The MST is {p_alg_dict['Path Found']}")
                 print(f"Weight of MST is {p_alg_dict['Minimal Weight']}")
@@ -75,11 +78,13 @@ def main():
 
         elif option == 5: # compare algorithm running time
 
-            print("option 5")
+            print("option 5, compare")
 
         elif option == 6: # save data to csv file
 
-            print("option 6")
+            print(save_csv_list)
+            save_csv(cfg.write_file_path, save_csv_list)
+            cfg.time_animation(3, "CSV file created successfully.")
 
         else: # option 7 - exit in controlled manner
 
