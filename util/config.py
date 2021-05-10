@@ -12,6 +12,7 @@ valueError_message = "Oops! That was a text. Please try again with a valid numbe
 welcome_message = "Welcome to the Minimum Connector Problem. \nPlease type the number below."
 invalid_message = ""
 maximum_weight = 1001
+no_nodes = 100
 
 # file path for file to be read and write
 read_file_path = "data/test_graph.csv"

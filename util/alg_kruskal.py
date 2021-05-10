@@ -50,7 +50,7 @@ def kruskal(graph):
     k_f_time = f"{k_r_time:.15f}"   # format the running time
 
     # return a dict with algorithm info
-    return {"Algorithm": "Kruskal's Algorithm (without queue)", "Number of Nodes": no_nodes, "Numbers of Edges": no_edges, "Computation Time": k_f_time, "Path Found": mst, "Minimal Weight": total_weight}
+    return {"Algorithm": "Kruskal's Algorithm (without queue)", "Number of Nodes": no_nodes, "Number of Edges": no_edges, "Computation Time": k_f_time, "Path Found": mst, "Minimal Weight": total_weight}
 
 # another kruskal's algorithm to find mst, by using queue
 def kruskal_queue(graph):
@@ -92,4 +92,4 @@ def kruskal_queue(graph):
     k_queue_f_time = f"{k_queue_r_time:.15f}"
 
     # return a dict with algorithm info
-    return {"Algorithm": "Kruskal's Algorithm (with queue)", "Number of Nodes": no_nodes, "Numbers of Edges": no_edges, "Computation Time": k_queue_f_time, "Path Found": mst, "Minimal Weight": total_weight}
+    return {"Algorithm": "Kruskal's Algorithm (with queue)", "Number of Nodes": no_nodes, "Number of Edges": no_edges, "Computation Time": k_queue_f_time, "Path Found": mst, "Minimal Weight": total_weight}
