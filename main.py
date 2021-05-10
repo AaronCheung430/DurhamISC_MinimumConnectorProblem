@@ -77,18 +77,16 @@ def main():
                 input("\nEnter to return to menu...") # pause the program
 
         elif option == 5: # compare algorithm running time
+            cfg.clear_screen()
             compared_csv = compare.compare()
-
-
             save_csv_list = save_csv_list + compared_csv
-            print("option 5, compare")
 
         elif option == 6: # save data to csv file
             if save_csv_list == []:
                 cfg.check_adjact_list("[3-5] to find MST of the graph", "MST")
                 continue
             else:
-                print(save_csv_list)
+                # print(save_csv_list)
                 save_csv(cfg.write_file_path, save_csv_list)
                 cfg.time_animation(3, "CSV file created successfully.")
 
