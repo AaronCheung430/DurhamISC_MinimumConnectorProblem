@@ -1,7 +1,6 @@
 # menu.py
 # functions for menu() and restart() after iterate once in the main loop
 
-import os
 import util.config as cfg
 
 # to show menu options
@@ -14,7 +13,7 @@ def menu():
     while option < 1 or option > len(cfg.menu_options):
 
         # call clear_screen()
-        # cfg.clear_screen()
+        cfg.clear_screen()
 
         # print the welcome message
         print(cfg.welcome_message)

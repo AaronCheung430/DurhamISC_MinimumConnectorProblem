@@ -21,14 +21,12 @@ write_file_path = "data/graphs_data.csv"
 # to display invalid message, after check is graph exist in the main program
 def check_adjact_list(message = f"'[1] {menu_options[0]}' to import a new graph", graph_message = "graph"):
     global invalid_message
-    clear_screen()
     invalid_message = f"\nPlease select {message} first. \n"
     print(f"Your {graph_message} is empty. \nPlease return to the main menu and choose {message} and come back later. \n")
     countdown(5)
 
 # to check which operation system is the user running this program on and clear the screen in the cell prompt
 def clear_screen():
-
     # to check is the user using linux or mac. The os.name for lunux and mac is "posix".
     if os.name == "posix":
         _ = os.system("clear")

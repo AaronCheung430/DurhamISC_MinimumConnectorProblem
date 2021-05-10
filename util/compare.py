@@ -2,12 +2,10 @@
 # to create networks and compare it
 
 import numpy as np
-# import config as cfg
 import util.config as cfg
 from util.alg_kruskal import kruskal, kruskal_queue
 from util.alg_prim import prim, prim_queue
 import matplotlib.pyplot as plt
-import matplotlib.animation as ani
 import pylab
 import random
 
@@ -81,21 +79,26 @@ def create_edges_graph(edges, nodes):
 
     return new_edges_graph  # return nested dict
 
-def find_comapre(temp_graph, k_alg_no_list, k_alg_time_list, k_alg_no_queue_list, k_alg_time_queue_list, p_alg_no_list, p_alg_time_list, p_alg_no_queue_list, p_alg_time_queue_list):
+def find_comapre(temp_graph, Nodes, k_alg_no_list, k_alg_time_list, k_alg_no_queue_list, k_alg_time_queue_list, p_alg_no_list, p_alg_time_list, p_alg_no_queue_list, p_alg_time_queue_list):
+
+    if Nodes == True:
+        key = "Number of Nodes"
+    else:
+        key = "Number of Edges"
 
     k_alg_queue_dict = kruskal_queue(temp_graph)
     p_alg_queue_dict = prim_queue(temp_graph)
     k_alg_dict = kruskal(temp_graph)
     p_alg_dict = prim(temp_graph)
 
-    k_alg_no_list.append(k_alg_dict["Number of Nodes"])  # append spceific value to list for x,y
+    k_alg_no_list.append(k_alg_dict[key])  # append spceific value to list for x,y
     k_alg_time_list.append(float(k_alg_dict["Computation Time"]))
-    k_alg_no_queue_list.append(k_alg_queue_dict["Number of Nodes"])
+    k_alg_no_queue_list.append(k_alg_queue_dict[key])
     k_alg_time_queue_list.append(float(k_alg_queue_dict["Computation Time"]))
 
-    p_alg_no_list.append(p_alg_dict["Number of Nodes"])  # append spceific value to list for x,y
+    p_alg_no_list.append(p_alg_dict[key])  # append spceific value to list for x,y
     p_alg_time_list.append(float(p_alg_dict["Computation Time"]))
-    p_alg_no_queue_list.append(p_alg_queue_dict["Number of Nodes"])
+    p_alg_no_queue_list.append(p_alg_queue_dict[key])
     p_alg_time_queue_list.append(float(p_alg_queue_dict["Computation Time"]))
 
     compared_csv.append(k_alg_dict) # append the dict to the list for csv purpose
@@ -112,8 +115,6 @@ def compare():
 
     print("Please wait... \nGenerating weighted graphs (It may takes up to 1-2 minutes) \n")
 
-    # compared_csv = []
-
     def compare_nodes():
 
         no_nodes_list = [2**i for i in range(2,10)]
@@ -126,7 +127,7 @@ def compare():
             temp_graph = create_completed_graph(node)
 
             (k_alg_dict, k_alg_nodes_list, k_alg_time_list, k_alg_queue_dict, k_alg_nodes_queue_list, k_alg_time_queue_list, p_alg_dict, p_alg_nodes_list,
-            p_alg_time_list, p_alg_queue_dict, p_alg_nodes_queue_list, p_alg_time_queue_list) = find_comapre(temp_graph,
+            p_alg_time_list, p_alg_queue_dict, p_alg_nodes_queue_list, p_alg_time_queue_list) = find_comapre(temp_graph, True,
             k_alg_nodes_list, k_alg_time_list, k_alg_nodes_queue_list, k_alg_time_queue_list,
             p_alg_nodes_list, p_alg_time_list, p_alg_nodes_queue_list, p_alg_time_queue_list)
 
@@ -147,25 +148,10 @@ def compare():
             temp_edge_graph = create_edges_graph(edge, nodes)
 
             (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list, p_alg_dict, p_alg_edges_list,
-            p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list) = find_comapre(temp_edge_graph,
+            p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list) = find_comapre(temp_edge_graph, False,
             k_alg_edges_list, k_alg_time_list, k_alg_edges_queue_list, k_alg_time_queue_list,
             p_alg_edges_list, p_alg_time_list, p_alg_edges_queue_list, p_alg_time_queue_list)
 
-            # # if queue is True:
-            # #     k_alg_dict = kruskal_queue(temp_edge_graph)
-            # #     p_alg_dict = prim_queue(temp_edge_graph)
-            # # else:
-            # #     k_alg_dict = kruskal(temp_edge_graph)
-            # #     p_alg_dict = prim(temp_edge_graph)
-
-            # k_alg_edges_list.append(k_alg_dict["Number of Edges"])  # append spceific value to list for x,y
-            # k_alg_time_list.append(float(k_alg_dict["Computation Time"]))
-
-            # p_alg_edges_list.append(p_alg_dict["Number of Edges"])  # append spceific value to list for x,y
-            # p_alg_time_list.append(float(p_alg_dict["Computation Time"]))
-
-            # compared_csv.append(k_alg_dict) # append the dict to the list for csv purpose
-            # compared_csv.append(p_alg_dict)
 
         return (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list,
         p_alg_dict, p_alg_edges_list, p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list)
@@ -185,24 +171,11 @@ def compare():
 
     plt.xlabel("Number of Nodes")
     plt.ylabel("Computation Time (s)")
-    plt.title('Comparing algorithm (without queue) computation time against the number of nodes')
+    plt.title('Comparing algorithm computation time \nagainst the number of nodes')
     plt.grid()
     plt.legend(loc='upper left', fontsize='small')
 
-    print("Found MST using both algorithms (without queue) with complete weighted graph. 1/2")
-
-    # k_alg_dict, k_alg_nodes_list, k_alg_time_list, p_alg_dict, p_alg_nodes_list, p_alg_time_list = compare_nodes(True)
-
-    # plt.subplot(2, 2, 2)    # create subgraph
-    # plt.plot(p_alg_nodes_list, p_alg_time_list, label=p_alg_dict["Algorithm"])
-    # plt.plot(k_alg_nodes_list, k_alg_time_list, label=k_alg_dict["Algorithm"])
-    # plt.xlabel("Number of Nodes")
-    # plt.ylabel("Computation Time (s)")
-    # plt.title('Comparing algorithm (with queue) computation time against the number of nodes')
-    # plt.grid()
-    # plt.legend(loc='upper left', fontsize='small')
-
-    # print("Found MST using both algorithms (with queue) with complete weighted graph. 2/4")
+    print("Found MST using both algorithms with complete weighted graph. 1/2")
 
 
     (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list, p_alg_dict,
@@ -217,25 +190,11 @@ def compare():
 
     plt.xlabel("Number of Edges")
     plt.ylabel("Computation Time (s)")
-    plt.title('Comparing algorithm (without queue) computation time against the number of edges')
+    plt.title('Comparing algorithm computation time \nagainst the number of edges')
     plt.grid()
     plt.legend(loc='upper left', fontsize='small')
 
-    print(f"Found MST using both algorithms (without queue) with a {p_alg_dict['Number of Nodes']} nodes weighted graph. 2/2")
-
-    # k_alg_dict, k_alg_edges_list, k_alg_time_list, p_alg_dict, p_alg_edges_list, p_alg_time_list = compare_edges(True)
-
-    # plt.subplot(2, 2, 4)    # create subgraph
-    # plt.plot(p_alg_edges_list, p_alg_time_list, label=p_alg_dict["Algorithm"])
-    # plt.plot(k_alg_edges_list, k_alg_time_list, label=k_alg_dict["Algorithm"])
-    # plt.xlabel("Number of Edges")
-    # plt.ylabel("Computation Time (s)")
-    # plt.title('Comparing algorithm (with queue) computation time against the number of edges')
-    # plt.grid()
-    # plt.legend(loc='upper left', fontsize='small')
-
-    # print(f"Found MST using both algorithms (with queue) with a {p_alg_dict['Number of Nodes']} nodes weighted graph. 4/4")
-
+    print(f"Found MST using both algorithms with a {p_alg_dict['Number of Nodes']} nodes weighted graph. 2/2")
 
 
     plt.savefig('data/comparison_algorithms.png')
@@ -247,6 +206,3 @@ def compare():
     plt.close('all')
 
     return compared_csv
-
-
-# print(create_edges_graph(99))
