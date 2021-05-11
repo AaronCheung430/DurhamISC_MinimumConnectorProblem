@@ -1,5 +1,8 @@
+# Created by 2595161 from Durham University Interntaional Study Centre
+# Last editied on 2021/05/20 18:00 GMT
+# Copyright © 2021 2595161. All rights reserved.
 # DUISC IFY Computer Science with Extended Research (CSER)
-# Summative 2 - Minimum Connector Problem
+# Summative 2 - Minimum Connector Problem v1.0
 
 # Student No: 2595161
 # DUID: qwwk95

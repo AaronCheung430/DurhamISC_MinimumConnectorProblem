@@ -11,7 +11,7 @@ def init_nodes(graph):
         nodes_dic[i] = {j}
     return nodes_dic
 
-# store (start_node, end_node, weight) into tuple and all inside the list
+# store (start_node, end_node, weight) into tuple as a edge list and store all of it inside a list
 def init_weight(graph):
     edge_list = []
     for start_node in graph.keys():

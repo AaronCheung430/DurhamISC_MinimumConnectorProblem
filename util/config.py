@@ -1,10 +1,10 @@
 # config.py
-# initialise most variable I needed in the project
+# initialise most variable I needed in the project and frequently used functions
 
 import os
 from time import sleep
 
-# set up the lists for the menu options
+# set up the list for the menu options
 menu_options = ["Import a new graph via csv file", "Output the adjacency list as a table", "Find MST using Kruskal's Algorithm", "Find MST using Prim's Algorithm", "Compare algorithms", "Save data to file in csv format", "Quit the Program"]
 
 # declare variables
@@ -14,7 +14,7 @@ invalid_message = ""
 maximum_weight = 1001
 no_nodes = 100
 
-# file path for file to be read and write
+# file paths for file to be read and write
 read_file_path = "data/test_graph.csv"
 write_file_path = "data/graphs_data.csv"
 
@@ -36,18 +36,15 @@ def clear_screen():
 
 # to preform the time delay animation
 def time_animation(t, message="Done!      "):
-
     for i in range(t):
         for frame in r'-\|/-\|/':
             # back up one character then print our next frame in the animation
             print('\rloading ', frame, sep='', end='', flush=True)
             sleep(0.125)
-
     print("\r" + message)
 
 # to countdown, get parameters about how many seconds is the countdown going to run, and the message that will show.
 def countdown(s, message = "Returning to main menu in"):
-
     # print countdown on the same line, until s is 0
     while s:
         timer = "{:01d}".format(s)

@@ -44,9 +44,7 @@ def prim(graph):
     p_f_time = f"{p_r_time:.15f}"   # format the running time
 
     # return a dict with algorithm info
-    return {"Algorithm": "Prim's Algorithm (without queue)", "Number of Nodes": len(seen_edges), "Number of Edges": no_edges, "Computation Time": p_f_time, "Path Found": mst, "Minimal Weight": total_weight}
-
-
+    return {"Algorithm": "Prim's Algorithm (without queue)", "Number of Nodes": len(graph), "Number of Edges": no_edges, "Computation Time": p_f_time, "Path Found": mst, "Minimal Weight": total_weight}
 
 # another prim's algorithm to find mst, by using queue
 def prim_queue(graph):
@@ -88,4 +86,4 @@ def prim_queue(graph):
     p_queue_f_time = f"{p_queue_r_time:.15f}"
 
     # return a dict with algorithm info
-    return {"Algorithm": "Prim's Algorithm (with queue)", "Number of Nodes": len(seen_edges), "Number of Edges": no_edges, "Computation Time": p_queue_f_time, "Path Found": mst, "Minimal Weight": total_weight}
+    return {"Algorithm": "Prim's Algorithm (with queue)", "Number of Nodes": len(graph), "Number of Edges": no_edges, "Computation Time": p_queue_f_time, "Path Found": mst, "Minimal Weight": total_weight}

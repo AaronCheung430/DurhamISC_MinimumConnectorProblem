@@ -35,5 +35,5 @@ def menu():
         except ValueError:
             cfg.invalid_message = f"\n{cfg.valueError_message}"
 
-    return option
+    return option   # return user's choice
 

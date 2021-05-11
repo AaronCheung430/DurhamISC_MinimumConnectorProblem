@@ -1,5 +1,5 @@
 # compare.py
-# to create networks and compare it
+# to create graph and compare it
 
 import numpy as np
 import util.config as cfg
@@ -8,10 +8,11 @@ from util.alg_prim import prim, prim_queue
 import matplotlib.pyplot as plt
 import pylab
 import random
+import pandas as pd
 
 compared_csv = []
 
-# create complete graph with random weight and return nested dict
+# create complete weighted graph with random weight and return nested dict
 def create_completed_graph(nodes):
 
     new_complete_graph = {}
@@ -33,8 +34,9 @@ def create_completed_graph(nodes):
 
         new_complete_graph[starting_node] = end_nodes_dict
 
-    return new_complete_graph
+    return new_complete_graph   # return nested dict
 
+# generate weighted graph when node is constant and edge is variable
 def create_edges_graph(edges, nodes):
 
     new_edges_graph = {} # create a dict to store graph
@@ -47,8 +49,8 @@ def create_edges_graph(edges, nodes):
         new_edges_graph[node] = {}  # create empty dict
 
     for weight in range(edges): # create weight list
-        weight = np.random.randint(1, 101)  # random generate an integer for weight
-        weight_list.append(weight)  # append weight to weight_list
+        weights = np.random.randint(1, cfg.maximum_weight)  # random generate an integer for weight
+        weight_list.append(weights)  # append weight to weight_list
 
     for starting_node in nodes_list:    # iterate through each elements in the list
         end_nodes_list = nodes_list.copy()  # copy from the nodes_list
@@ -63,8 +65,8 @@ def create_edges_graph(edges, nodes):
             if not all_available_nodes[starting_node]:  # check is there any element in this index of the nested list
                 continue
 
-            weight = random.choice(weight_list) # random choose a element from weight_list
-            weight_list.remove(weight)  # remove the corresponding element
+            weights = random.choice(weight_list) # random choose a element from weight_list
+            weight_list.remove(weights)  # remove the corresponding element
             end_node = random.choice(all_available_nodes[starting_node])    # random choose a element from nested list
 
             if edges == nodes - 1 and last_node == True:    # to prevent all nodes are not connected
@@ -74,19 +76,20 @@ def create_edges_graph(edges, nodes):
             all_available_nodes[starting_node].remove(end_node) # remove the self value in the starting_node of all_available_nodes
             all_available_nodes[end_node].remove(starting_node) # remove the starting_node value in the end_node of all_available_nodes
 
-            new_edges_graph[starting_node][end_node] = weight   # store weight to corresponding dict
-            new_edges_graph[end_node][starting_node] = weight   # store weight to corresponding dict
+            new_edges_graph[starting_node][end_node] = weights   # store weight to corresponding dict
+            new_edges_graph[end_node][starting_node] = weights   # store weight to corresponding dict
 
     return new_edges_graph  # return nested dict
 
+# run all algorithms and store it's data to a list
 def find_comapre(temp_graph, Nodes, k_alg_no_list, k_alg_time_list, k_alg_no_queue_list, k_alg_time_queue_list, p_alg_no_list, p_alg_time_list, p_alg_no_queue_list, p_alg_time_queue_list):
 
-    if Nodes == True:
+    if Nodes == True:   # determine it is comparing nodes or edges
         key = "Number of Nodes"
     else:
         key = "Number of Edges"
 
-    k_alg_queue_dict = kruskal_queue(temp_graph)
+    k_alg_queue_dict = kruskal_queue(temp_graph)    # run algorithm and store it's return value to a variable
     p_alg_queue_dict = prim_queue(temp_graph)
     k_alg_dict = kruskal(temp_graph)
     p_alg_dict = prim(temp_graph)
@@ -106,98 +109,114 @@ def find_comapre(temp_graph, Nodes, k_alg_no_list, k_alg_time_list, k_alg_no_que
     compared_csv.append(k_alg_queue_dict)
     compared_csv.append(p_alg_queue_dict)
 
+    # return all data
     return (k_alg_dict, k_alg_no_list, k_alg_time_list, k_alg_queue_dict, k_alg_no_queue_list, k_alg_time_queue_list,
     p_alg_dict, p_alg_no_list, p_alg_time_list, p_alg_queue_dict, p_alg_no_queue_list, p_alg_time_queue_list)
-
 
 # compare algorithm in running time against number of edges and vertices
 def compare():
 
     print("Please wait... \nGenerating weighted graphs (It may takes up to 1-2 minutes) \n")
 
+    # compare running time against nodes
     def compare_nodes():
 
-        no_nodes_list = [2**i for i in range(2,10)]
+        no_nodes_list = [2**i for i in range(2,10)] # create a list with the number of nodes
 
+        # set up variables
         k_alg_nodes_list, k_alg_time_list, k_alg_nodes_queue_list, k_alg_time_queue_list = [], [], [], []
         p_alg_nodes_list, p_alg_time_list, p_alg_nodes_queue_list, p_alg_time_queue_list = [], [], [], []
 
-        for node in no_nodes_list:
+        for node in no_nodes_list:  # iterate through each elements in list
 
-            temp_graph = create_completed_graph(node)
+            temp_graph = create_completed_graph(node)   # generate complete weighted graph with the number of nodes
 
+            # call function to run all algorithms
             (k_alg_dict, k_alg_nodes_list, k_alg_time_list, k_alg_queue_dict, k_alg_nodes_queue_list, k_alg_time_queue_list, p_alg_dict, p_alg_nodes_list,
             p_alg_time_list, p_alg_queue_dict, p_alg_nodes_queue_list, p_alg_time_queue_list) = find_comapre(temp_graph, True,
             k_alg_nodes_list, k_alg_time_list, k_alg_nodes_queue_list, k_alg_time_queue_list,
             p_alg_nodes_list, p_alg_time_list, p_alg_nodes_queue_list, p_alg_time_queue_list)
 
-
+        # return all data
         return (k_alg_dict, k_alg_nodes_list, k_alg_time_list, k_alg_queue_dict, k_alg_nodes_queue_list, k_alg_time_queue_list
         , p_alg_dict, p_alg_nodes_list, p_alg_time_list, p_alg_queue_dict, p_alg_nodes_queue_list, p_alg_time_queue_list)
 
+    # compare running time against edges
     def compare_edges(nodes = cfg.no_nodes):
 
+        # set up variables
         k_alg_edges_list, k_alg_time_list, k_alg_edges_queue_list, k_alg_time_queue_list = [], [], [], []
         p_alg_edges_list, p_alg_time_list, p_alg_edges_queue_list, p_alg_time_queue_list = [], [], [], []
 
-        min_edge = nodes-1
-        max_egde = int(nodes*(nodes-1)/2)
+        min_edge = nodes-1      # set minimum number of edges
+        max_egde = int(nodes*(nodes-1)/2)   # set maximum number of edges
 
-        for edge in range(min_edge, max_egde, 50):
+        for edge in range(min_edge, max_egde, 50):  # iterate over a sequence incrementally
 
-            temp_edge_graph = create_edges_graph(edge, nodes)
+            temp_edge_graph = create_edges_graph(edge, nodes)   # generate weighted graph with the number of edges
 
+            # call function to run all algorithms
             (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list, p_alg_dict, p_alg_edges_list,
             p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list) = find_comapre(temp_edge_graph, False,
             k_alg_edges_list, k_alg_time_list, k_alg_edges_queue_list, k_alg_time_queue_list,
             p_alg_edges_list, p_alg_time_list, p_alg_edges_queue_list, p_alg_time_queue_list)
 
-
+        # return all data
         return (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list,
         p_alg_dict, p_alg_edges_list, p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list)
 
+    # find moving average
+    def moving_average(time_list, window_size = 3):
+        moving_averages_list = pd.Series(time_list).rolling(window_size).mean().tolist()
+        return moving_averages_list
 
-    (k_alg_dict, k_alg_nodes_list, k_alg_time_list, k_alg_queue_dict, k_alg_nodes_queue_list, k_alg_time_queue_list, p_alg_dict,
-    p_alg_nodes_list, p_alg_time_list, p_alg_queue_dict, p_alg_nodes_queue_list, p_alg_time_queue_list) = compare_nodes()
+    # # set variables with returned values
+    # (k_alg_dict, k_alg_nodes_list, k_alg_time_list, k_alg_queue_dict, k_alg_nodes_queue_list, k_alg_time_queue_list, p_alg_dict,
+    # p_alg_nodes_list, p_alg_time_list, p_alg_queue_dict, p_alg_nodes_queue_list, p_alg_time_queue_list) = compare_nodes()
 
-    pylab.rcParams["axes.titlesize"] = 8
+    pylab.rcParams["axes.titlesize"] = 8    # set title size
 
-    plt.subplot(1, 2, 1)    # create subgraph
-    plt.plot(p_alg_nodes_list, p_alg_time_list, label=p_alg_dict["Algorithm"])
-    plt.plot(k_alg_nodes_list, k_alg_time_list, label=k_alg_dict["Algorithm"])
+    # plt.subplot(2, 1, 1)    # create subgraph
+    # plt.plot(p_alg_nodes_list, p_alg_time_list, label=p_alg_dict["Algorithm"])  # plot graphs using list for x,y and corresponding label
+    # plt.plot(k_alg_nodes_list, k_alg_time_list, label=k_alg_dict["Algorithm"])
+    # plt.plot(p_alg_nodes_queue_list, p_alg_time_queue_list, label=p_alg_queue_dict["Algorithm"])
+    # plt.plot(k_alg_nodes_queue_list, k_alg_time_queue_list, label=k_alg_queue_dict["Algorithm"])
+    # plt.xlabel("Number of Nodes")   # set the first subgraph attributes
+    # plt.ylabel("Computation Time (s)")
+    # plt.title('Comparing algorithm computation time against the number of nodes')
+    # plt.grid()
+    # plt.legend(loc='upper left', fontsize='small')
 
-    plt.plot(p_alg_nodes_queue_list, p_alg_time_queue_list, label=p_alg_queue_dict["Algorithm"])
-    plt.plot(k_alg_nodes_queue_list, k_alg_time_queue_list, label=k_alg_queue_dict["Algorithm"])
+    # print("Found MST using both algorithms with complete weighted graph. 1/2")
 
-    plt.xlabel("Number of Nodes")
-    plt.ylabel("Computation Time (s)")
-    plt.title('Comparing algorithm computation time \nagainst the number of nodes')
-    plt.grid()
-    plt.legend(loc='upper left', fontsize='small')
-
-    print("Found MST using both algorithms with complete weighted graph. 1/2")
-
-
+    # set variables with returned values
     (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list, p_alg_dict,
     p_alg_edges_list, p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list) = compare_edges()
 
-    plt.subplot(1, 2, 2)    # create subgraph
-    plt.plot(p_alg_edges_list, p_alg_time_list, label=p_alg_dict["Algorithm"])
-    plt.plot(k_alg_edges_list, k_alg_time_list, label=k_alg_dict["Algorithm"])
+    # plt.subplot(2, 1, 2)    # create subgraph
+    # plt.plot(p_alg_edges_list, moving_average(p_alg_time_list), label=p_alg_dict["Algorithm"]+"moving")  # plot graphs using list for x,y and corresponding label
+    # plt.plot(k_alg_edges_list, moving_average(k_alg_time_list), label=k_alg_dict["Algorithm"]+"moving")
+    # plt.plot(p_alg_edges_queue_list, moving_average(p_alg_time_queue_list), label=p_alg_queue_dict["Algorithm"]+"moving")
+    # plt.plot(k_alg_edges_queue_list, moving_average(k_alg_time_queue_list), label=k_alg_queue_dict["Algorithm"]+"moving")
 
-    plt.plot(p_alg_edges_queue_list, p_alg_time_queue_list, label=p_alg_queue_dict["Algorithm"])
-    plt.plot(k_alg_edges_queue_list, k_alg_time_queue_list, label=k_alg_queue_dict["Algorithm"])
+    plt.plot(p_alg_edges_list, p_alg_time_list, label=p_alg_dict["Algorithm"], marker=".")  # plot graphs using list for x,y and corresponding label
+    plt.plot(k_alg_edges_list, k_alg_time_list, label=k_alg_dict["Algorithm"], marker=".")
+    plt.plot(p_alg_edges_queue_list, p_alg_time_queue_list, label=p_alg_queue_dict["Algorithm"], marker=".")
+    plt.plot(k_alg_edges_queue_list, k_alg_time_queue_list, label=k_alg_queue_dict["Algorithm"], marker=".")
 
-    plt.xlabel("Number of Edges")
+    print(p_alg_edges_list)
+    print(p_alg_edges_queue_list)
+
+    plt.xlabel("Number of Edges")   # set the second subgraph attributes
     plt.ylabel("Computation Time (s)")
-    plt.title('Comparing algorithm computation time \nagainst the number of edges')
+    plt.title(f'Comparing algorithm computation time against the number of edges with {cfg.no_nodes} nodes weighted graph')
     plt.grid()
     plt.legend(loc='upper left', fontsize='small')
 
     print(f"Found MST using both algorithms with a {p_alg_dict['Number of Nodes']} nodes weighted graph. 2/2")
 
-
-    plt.savefig('data/comparison_algorithms.png')
+    # show graph
+    plt.savefig('data/comparison_algorithms.png', bbox_inches='tight')
     plt.tight_layout()
     plt.show()
     plt.ion()
