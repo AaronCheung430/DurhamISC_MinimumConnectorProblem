@@ -8,7 +8,7 @@
 # ------------------------------- Imported Packages -------------------------------
 
 from util import config as cfg
-from util import start as strt
+from util.start import menu
 from util.adj_list import open_csv_file, output_adj_list_table, save_csv
 from util import alg_kruskal, alg_prim
 from util import compare
@@ -18,14 +18,14 @@ from util import compare
 def main():
 
     end_program = False # variable used to check if user wants to exit program
-    adjac_list = {}
-    save_csv_list = []
+    adjac_list = {} # set up variables to store adjac_list
+    save_csv_list = []  # set up variables to store info about all adjac_list
 
     # loop until end_program is True
     while not end_program:
 
         # call menu function and get user's choice
-        option = strt.menu()
+        option = menu()
 
         if option == 1: # import a graph from csv
             cfg.clear_screen()

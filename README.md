@@ -4,4 +4,7 @@ A program created with python to find the minimum spanning tree for any graph by
 ## Import csv file
 Please ensure your csv is located in the 'data' folder, and you may change the file name in the program in 'util/config.py' read_csv_file.
 
+## Run the program
+Please run the program in 'main.py'
+
 Thanks

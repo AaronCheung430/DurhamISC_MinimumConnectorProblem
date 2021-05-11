@@ -1,4 +1,4 @@
-# menu.py
+# start.py
 # functions for menu() and restart() after iterate once in the main loop
 
 import util.config as cfg
@@ -31,6 +31,7 @@ def menu():
             if option < 1 or option > len(cfg.menu_options):
                 cfg.invalid_message = f"\nPlease trying again by entering a number between 1-{len(cfg.menu_options)}. \n"
 
+        # handle the error if an exception occurs, to prevent the program from being terminating
         except ValueError:
             cfg.invalid_message = f"\n{cfg.valueError_message}"
 
