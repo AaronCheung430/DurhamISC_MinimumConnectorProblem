@@ -1,5 +1,5 @@
 # start.py
-# functions for menu() and restart() after iterate once in the main loop
+# menu() functions for main program and allow user to enter choice
 
 import util.config as cfg
 
