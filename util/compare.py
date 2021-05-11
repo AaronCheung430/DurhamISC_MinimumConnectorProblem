@@ -2,9 +2,14 @@
 # to create graph and compare it
 
 import numpy as np
-import util.config as cfg
-from util.alg_kruskal import kruskal, kruskal_queue
-from util.alg_prim import prim, prim_queue
+
+import config as cfg
+from alg_kruskal import kruskal, kruskal_queue
+from alg_prim import prim, prim_queue
+
+# import util.config as cfg
+# from util.alg_kruskal import kruskal, kruskal_queue
+# from util.alg_prim import prim, prim_queue
 import matplotlib.pyplot as plt
 import pylab
 import random
@@ -225,3 +230,5 @@ def compare():
     plt.close('all')
 
     return compared_csv
+
+print(prim_queue(create_edges_graph(100,100)))
