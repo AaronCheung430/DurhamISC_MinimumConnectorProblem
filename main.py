@@ -43,14 +43,14 @@ def main():
             if adjac_list == {}:
                 cfg.check_adjact_list()
                 continue
-            else:
-                output_adj_list, output_adj_matrix = output_adj_list_table(adjac_list)
-                print(f"Here is your adjacency list for your graph: \n{output_adj_list}")
-                input("\nEnter to show the adjacency matrix") # pause the program
-                cfg.clear_screen()
-                print(f"Here is your adjacency matrix for your graph: \n{output_adj_matrix}")
-                input("\nEnter to return to menu...") # pause the program
-                cfg.countdown(4)
+
+            output_adj_list, output_adj_matrix = output_adj_list_table(adjac_list)
+            print(f"Here is your adjacency list for your graph: \n{output_adj_list}")
+            input("\nEnter to show the adjacency matrix") # pause the program
+            cfg.clear_screen()
+            print(f"Here is your adjacency matrix for your graph: \n{output_adj_matrix}")
+            input("\nEnter to return to menu...") # pause the program
+            cfg.countdown(4)
 
         elif option == 3: # find MST using kruskal's algorithm
             cfg.clear_screen()

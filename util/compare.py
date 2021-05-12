@@ -207,7 +207,7 @@ def compare():
 
     print(f"Found MST using both algorithms with a {p_alg_dict['Number of Nodes']} nodes weighted graph. 2/2")
 
-    # show graph
+    # show graph and save figure
     plt.tight_layout()
     plt.savefig('data/comparison_algorithms.png')
     plt.show()
@@ -216,4 +216,4 @@ def compare():
     input("\nEnter to return to menu...")   # pause the program to show graph
     plt.close('all')
 
-    return compared_csv
+    return compared_csv # return a list of dicts
