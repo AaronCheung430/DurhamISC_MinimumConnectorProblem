@@ -58,15 +58,15 @@ def main():
             if adjac_list == {}:
                 cfg.check_adjact_list()
                 continue
-            else:
-                k_alg_dict = alg_kruskal.kruskal(adjac_list)    # call function, and return a dict
-                save_csv_list.append(k_alg_dict)
-                cfg.time_animation(3)
-                print(f"Here are the results using {k_alg_dict['Algorithm']}:") # print information about the algorithm
-                print(f"The MST is {k_alg_dict['Path Found']}")
-                print(f"Weight of MST is {k_alg_dict['Minimal Weight']}")
-                print(f"Computation time is {k_alg_dict['Computation Time']}s")
-                input("\nEnter to return to menu...") # pause the program
+
+            k_alg_dict = alg_kruskal.kruskal(adjac_list)    # call function, and return a dict
+            save_csv_list.append(k_alg_dict)    # append returned dict to list
+            cfg.time_animation(3)
+            print(f"Here are the results using {k_alg_dict['Algorithm']}:") # print information about the algorithm
+            print(f"The MST is {k_alg_dict['Path Found']}")
+            print(f"Weight of MST is {k_alg_dict['Minimal Weight']}")
+            print(f"Computation time is {k_alg_dict['Computation Time']}s")
+            input("\nEnter to return to menu...") # pause the program
 
         elif option == 4: # find MST using prim's algorithm
             cfg.clear_screen()
@@ -74,21 +74,21 @@ def main():
             if adjac_list == {}:
                 cfg.check_adjact_list()
                 continue
-            else:
-                p_alg_dict = alg_prim.prim(adjac_list)  # call function, and return a dict
-                save_csv_list.append(p_alg_dict)
-                cfg.time_animation(3)
-                print(f"Here are the results using {p_alg_dict['Algorithm']}:") # print information about the algorithm
-                print(f"The MST is {p_alg_dict['Path Found']}")
-                print(f"Weight of MST is {p_alg_dict['Minimal Weight']}")
-                print(f"Computation time is {p_alg_dict['Computation Time']}s")
-                input("\nEnter to return to menu...") # pause the program
+
+            p_alg_dict = alg_prim.prim(adjac_list)  # call function, and return a dict
+            save_csv_list.append(p_alg_dict)    # append returned dict to list
+            cfg.time_animation(3)
+            print(f"Here are the results using {p_alg_dict['Algorithm']}:") # print information about the algorithm
+            print(f"The MST is {p_alg_dict['Path Found']}")
+            print(f"Weight of MST is {p_alg_dict['Minimal Weight']}")
+            print(f"Computation time is {p_alg_dict['Computation Time']}s")
+            input("\nEnter to return to menu...") # pause the program
 
         elif option == 5: # compare algorithm running time
             cfg.clear_screen()
             print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
-            compared_csv = compare.compare()
-            save_csv_list = save_csv_list + compared_csv
+            compared_csv = compare.compare()    # call function, and return a list
+            save_csv_list = save_csv_list + compared_csv    # extend returned list to list
 
         elif option == 6: # save data to csv file
             cfg.clear_screen()
@@ -96,10 +96,10 @@ def main():
             if save_csv_list == []:
                 cfg.check_adjact_list("[3-5] to find MST of the graph", "MST")
                 continue
-            else:
-                save_csv(cfg.write_file_path, save_csv_list)
-                cfg.time_animation(3, "CSV file created successfully. \n")
-                cfg.countdown(4)
+
+            save_csv(cfg.write_file_path, save_csv_list)    # call function to save csv
+            cfg.time_animation(3, "CSV file created successfully. \n")
+            cfg.countdown(4)
 
         else: # option 7 - exit in controlled manner
 

@@ -147,15 +147,12 @@ def compare():
         k_alg_edges_list, k_alg_time_list, k_alg_edges_queue_list, k_alg_time_queue_list = [], [], [], []
         p_alg_edges_list, p_alg_time_list, p_alg_edges_queue_list, p_alg_time_queue_list = [], [], [], []
 
-        min_edge = nodes-1     # set minimum number of edges
-        max_egde = int(nodes*(nodes-1)/2)   # set maximum number of edges
+        min_edge = nodes    # set minimum number of edges
+        max_egde = int(nodes*(nodes-1)/2)+1   # set maximum number of edges +1
 
         for edge in range(min_edge, max_egde, 50):  # iterate over a sequence incrementally
 
             temp_edge_graph = create_edges_graph(edge, nodes)   # generate weighted graph with the number of edges
-
-            if edge == 99:
-                print(temp_edge_graph)
 
             # call function to run all algorithms
             (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list, p_alg_dict, p_alg_edges_list,
@@ -195,9 +192,6 @@ def compare():
     # set variables with returned values
     (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list, p_alg_dict,
     p_alg_edges_list, p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list) = compare_edges()
-
-    print(p_alg_edges_queue_list)
-    print(p_alg_edges_list)
 
     plt.subplot(2, 1, 2)    # create subgraph
     plt.plot(p_alg_edges_list, moving_average(p_alg_time_list), label=p_alg_dict["Algorithm"] + " Moving Average")  # plot graphs using list for x,y and corresponding label
