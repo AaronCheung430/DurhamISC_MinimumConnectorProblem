@@ -13,6 +13,7 @@ welcome_message = "Welcome to the Minimum Connector Problem. \nPlease type the n
 invalid_message = ""
 maximum_weight = 1001
 no_nodes = 100
+window_size = 3
 
 # file paths for file to be read and write
 read_file_path = "data/test_graph.csv"

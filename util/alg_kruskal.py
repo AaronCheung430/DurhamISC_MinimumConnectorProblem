@@ -19,7 +19,7 @@ def init_weight(graph):
             if start_node != end_node:
                 edge_list.append((start_node, end_node, int(graph[start_node][end_node])))
     edge_list.sort(key = lambda x:x[-1], reverse = False)    # sort the list in ascending order
-    return edge_list
+    return edge_list    # return a list of tuples
 
 # kruskal's algorithm to find mst
 def kruskal(graph):
