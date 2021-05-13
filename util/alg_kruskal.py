@@ -62,8 +62,8 @@ def kruskal_queue(graph):
 
     # put all edges into que
     for i in list(graph.keys()):
-        for next_to, cost in graph[i].items():
-            que.put((int(cost), i, next_to))
+        for next_to, weight in graph[i].items():
+            que.put((int(weight), i, next_to))
 
     no_nodes = len(nodes)   # find number of nodes in graph
     no_edges = int(que.qsize()/2)    # find number of edges in graph
@@ -71,7 +71,7 @@ def kruskal_queue(graph):
     # when que is not empty, run the following code
     while not que.empty():
         edge = que.get()    # get the first element in que, and it will be removed by default
-        cost, frm, to = edge    # unpack edge
+        weight, frm, to = edge    # unpack edge
 
         # iterate through each key in the dict
         for i in nodes.keys():
@@ -84,7 +84,7 @@ def kruskal_queue(graph):
         if start_node != end_node:
             nodes[start_node] = nodes[start_node] | nodes[end_node]
             del nodes[end_node]
-            new_edge = (frm, to, cost)  # reformat the edge into correct order
+            new_edge = (frm, to, weight)  # reformat the edge into correct order
             mst.append(new_edge)
 
     total_weight = sum([x[-1] for x in mst])
