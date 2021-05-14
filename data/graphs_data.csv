@@ -1,9 +1,3 @@
 Algorithm,Number of Nodes,Number of Edges,Computation Time,Path Found,Minimal Weight
-Kruskal's Algorithm (without queue),9,17,0.000117441999997,"[('B', 'C', 6), ('A', 'B', 7), ('D', 'E', 10), ('C', 'D', 11), ('D', 'F', 13), ('E', 'I', 15), ('F', 'H', 16), ('G', 'H', 20)]",98
-Prim's Algorithm (without queue),9,17,0.000047528000003,"[('A', 'B', 7), ('B', 'C', 6), ('C', 'D', 11), ('D', 'E', 10), ('D', 'F', 13), ('E', 'I', 15), ('F', 'H', 16), ('H', 'G', 20)]",98
-Kruskal's Algorithm (without queue),4,6,0.000021560999997,"[(2, 3, 60), (1, 3, 155), (0, 2, 158)]",373
-Prim's Algorithm (without queue),4,6,0.000012640000001,"[(0, 2, 158), (2, 3, 60), (3, 1, 155)]",373
-Kruskal's Algorithm (with queue),4,6,0.000146065000003,"[(2, 3, 60), (1, 3, 155), (0, 2, 158)]",373
-Prim's Algorithm (with queue),4,6,0.000048821000000,"[(0, 2, 158), (2, 3, 60), (3, 1, 155)]",373
-Kruskal's Algorithm (without queue),8,28,0.000057845000001,"[(3, 5, 28), (1, 2, 69), (1, 7, 128), (6, 7, 266), (0, 4, 299), (1, 5, 361), (2, 4, 401)]",1552
-Prim's Algorithm (without queue),8,28,0.000034976999999,"[(0, 4, 299), (4, 2, 401), (2, 1, 69), (1, 7, 128), (7, 6, 266), (1, 5, 361), (5, 3, 28)]",1552
+Kruskal's Algorithm (without queue),5,7,0.000053276000003,"[('B', 'C', 2), ('A', 'B', 4), ('A', 'D', 6), ('A', 'E', 6)]",18
+Prim's Algorithm (without queue),5,7,0.000101114999993,"[('A', 'B', 4), ('B', 'C', 2), ('A', 'D', 6), ('A', 'E', 6)]",18

@@ -31,12 +31,27 @@ def main():
         option = menu()
 
         if option == 1: # import a graph from csv
-            cfg.clear_screen()
-            print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
-            cfg.read_file_path
-            adjac_list = open_csv_file(cfg.read_file_path)
-            cfg.time_animation(3, "CSV file imported successfully. \n")
-            cfg.countdown(4)
+            read_file = True
+            file_path_error_message = ""
+            import_file_message = "Importing your graph via csv file"
+            while read_file:
+                cfg.clear_screen()
+                print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
+                print("Please ensure your csv file is located in the 'data' folder. \nPress 'Enter' directly to use the default test graph.")
+                print(file_path_error_message)
+                try:
+                    read_file_path = "data/" + input("Enter your file name (without .csv): \n") + ".csv"
+                    if read_file_path == "data/.csv":
+                        read_file_path = cfg.default_read_file_path
+                        import_file_message = "Importing default test graph"
+                    adjac_list = open_csv_file(read_file_path)
+                    cfg.clear_screen()
+                    print(import_file_message, "\n")
+                    cfg.time_animation(3, "CSV file imported successfully. \n")
+                    cfg.countdown(4)
+                    read_file = False
+                except FileNotFoundError:
+                    file_path_error_message = "\nNO SUCH FILE! REMEMBER TO LOCATE YOUR CSV FILE IN THE 'DATA' FOLDER. \n"
 
         elif option == 2: # output the adjacency list as a table
             cfg.clear_screen()

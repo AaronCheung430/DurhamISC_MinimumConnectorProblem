@@ -16,7 +16,7 @@ no_nodes = 100
 window_size = 3
 
 # file paths for file to be read and write
-read_file_path = "data/test_graph.csv"
+default_read_file_path = "data/test_graph.csv"
 write_file_path = "data/graphs_data.csv"
 
 # to display invalid message, after check is graph exist in the main program
