@@ -33,6 +33,7 @@ def main():
         if option == 1: # import a graph from csv
             cfg.clear_screen()
             print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
+            cfg.read_file_path
             adjac_list = open_csv_file(cfg.read_file_path)
             cfg.time_animation(3, "CSV file imported successfully. \n")
             cfg.countdown(4)
