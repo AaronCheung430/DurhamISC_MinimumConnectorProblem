@@ -34,17 +34,17 @@ def main():
             read_file = True
             file_path_error_message = ""
             import_file_message = "Importing your graph via csv file"
-            while read_file:
+            while read_file:    # loop when read_file is true
                 cfg.clear_screen()
                 print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
                 print("Please ensure your csv file is located in the 'data' folder. \nPress 'Enter' directly to use the default test graph.")
                 print(file_path_error_message)
-                try:
+                try:    # allow user to enter the file path
                     read_file_path = "data/" + input("Enter your file name (without .csv): \n") + ".csv"
-                    if read_file_path == "data/.csv":
+                    if read_file_path == "data/.csv":   # check did user enter anything
                         read_file_path = cfg.default_read_file_path
                         import_file_message = "Importing default test graph"
-                    adjac_list = open_csv_file(read_file_path)
+                    adjac_list = open_csv_file(read_file_path)  # call function
                     cfg.clear_screen()
                     print(import_file_message, "\n")
                     cfg.time_animation(3, "CSV file imported successfully. \n")
