@@ -50,7 +50,7 @@ def main():
                     cfg.time_animation(3, "CSV file imported successfully. \n")
                     cfg.countdown(4)
                     read_file = False
-                except FileNotFoundError:
+                except FileNotFoundError:   # handle the error if an exception occurs, to prevent the program from being terminating
                     file_path_error_message = "\nNO SUCH FILE! REMEMBER TO LOCATE YOUR CSV FILE IN THE 'DATA' FOLDER. \n"
 
         elif option == 2: # output the adjacency list as a table
