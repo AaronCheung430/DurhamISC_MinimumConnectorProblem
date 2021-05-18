@@ -15,7 +15,7 @@ def menu():
         # call clear_screen()
         cfg.clear_screen()
 
-        # print the welcome message
+        # print the messages
         print(cfg.welcome_message)
         print(cfg.invalid_message)
 

@@ -21,8 +21,8 @@ from util import compare
 def main():
 
     end_program = False # variable used to check if user wants to exit program
-    adjac_list = {} # set up variables to store adjac_list
-    save_csv_list = []  # set up variables to store info about all adjac_list
+    adjac_list = {} # set up variable to store nested dict
+    save_csv_list = []  # set up variable to store info about all adjac_list
 
     # loop until end_program is True
     while not end_program:
@@ -56,11 +56,11 @@ def main():
         elif option == 2: # output the adjacency list as a table
             cfg.clear_screen()
             print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
-            if adjac_list == {}:
+            if adjac_list == {}:    # check is variable a empty dict
                 cfg.check_adjact_list()
                 continue
 
-            output_adj_list, output_adj_matrix = output_adj_list_table(adjac_list)
+            output_adj_list, output_adj_matrix = output_adj_list_table(adjac_list)  # call function, and return a dataframe
             print(f"Here is your adjacency list for your graph: \n{output_adj_list}")
             input("\nEnter to show the adjacency matrix") # pause the program
             cfg.clear_screen()
@@ -71,7 +71,7 @@ def main():
         elif option == 3: # find MST using kruskal's algorithm
             cfg.clear_screen()
             print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
-            if adjac_list == {}:
+            if adjac_list == {}:    # check is variable a empty dict
                 cfg.check_adjact_list()
                 continue
 
@@ -87,7 +87,7 @@ def main():
         elif option == 4: # find MST using prim's algorithm
             cfg.clear_screen()
             print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
-            if adjac_list == {}:
+            if adjac_list == {}:    # check is variable a empty dict
                 cfg.check_adjact_list()
                 continue
 
@@ -103,8 +103,8 @@ def main():
         elif option == 5: # compare algorithm running time
             cfg.clear_screen()
             print(f"You have chosen [{option}] {cfg.menu_options[option-1]}. \n")
-            compared_csv = compare.compare()    # call function, and return a list
-            save_csv_list = save_csv_list + compared_csv    # extend returned list to list
+            compared_csv = compare.compare()    # call function, and return a list of dicts
+            save_csv_list = save_csv_list + compared_csv    # extend list from the returned list
 
         elif option == 6: # save data to csv file
             cfg.clear_screen()
@@ -126,7 +126,7 @@ def main():
             print("Thank you for using this program")
             print("Quitting Program...")
 
-        cfg.invalid_message = ""    # reset variable, to avoid invalid message in the next loop
+        cfg.invalid_message = ""    # reset variable, to avoid invalid message to be shown in the next loop
 
         #### END OF MAIN PROGRAM
 

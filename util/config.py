@@ -1,5 +1,5 @@
 # config.py
-# initialise most variable I needed in the project and frequently used functions
+# initialise most variables I needed in the project and frequently used functions
 
 import os
 from time import sleep
@@ -39,7 +39,7 @@ def clear_screen():
 def time_animation(t, message="Done!      "):
     for i in range(t):
         for frame in r'-\|/-\|/':
-            # back up one character then print our next frame in the animation
+            # to make the next stdout line begin at the beginning of the current line
             print('\rloading ', frame, sep='', end='', flush=True)
             sleep(0.125)
     print("\r" + message)

@@ -1,5 +1,5 @@
 # compare.py
-# to create graph and compare it
+# to generate networks and compare it
 
 import numpy as np
 import util.config as cfg
@@ -11,7 +11,7 @@ import pandas as pd
 
 compared_csv = []   # create list to store all info from algorithms ran
 
-# create complete weighted graph with random weight and return nested dict
+# create complete, undirected, weighted graph with random weight and return nested dict
 def create_completed_graph(nodes):
 
     new_complete_graph = {} # create a dict to store graph
@@ -35,7 +35,7 @@ def create_completed_graph(nodes):
 
     return new_complete_graph   # return nested dict
 
-# generate weighted graph when node is constant and edge is variable
+# generate undirected, weighted graph when node is constant and edge is variable
 def create_edges_graph(edges, nodes):
 
     new_edges_graph = {} # create a dict to store graph
@@ -74,9 +74,8 @@ def create_edges_graph(edges, nodes):
 
             all_available_nodes[starting_node].remove(end_node) # remove the self value in the starting_node of all_available_nodes
             all_available_nodes[end_node].remove(starting_node) # remove the starting_node value in the end_node of all_available_nodes
-
             new_edges_graph[starting_node][end_node] = weights   # store weight to corresponding dict
-            new_edges_graph[end_node][starting_node] = weights   # store weight to corresponding dict
+            new_edges_graph[end_node][starting_node] = weights
 
     return new_edges_graph  # return nested dict
 
@@ -128,7 +127,7 @@ def compare():
 
         for node in no_nodes_list:  # iterate through each elements in list
 
-            temp_graph = create_completed_graph(node)   # generate complete weighted graph with the number of nodes
+            temp_graph = create_completed_graph(node)   # call function to generate complete weighted graph with the number of nodes
 
             # call function to run all algorithms
             (k_alg_dict, k_alg_nodes_list, k_alg_time_list, k_alg_queue_dict, k_alg_nodes_queue_list, k_alg_time_queue_list, p_alg_dict, p_alg_nodes_list,
@@ -152,7 +151,7 @@ def compare():
 
         for edge in range(min_edge, max_egde, 50):  # iterate over a sequence incrementally
 
-            temp_edge_graph = create_edges_graph(edge, nodes)   # generate weighted graph with the number of edges
+            temp_edge_graph = create_edges_graph(edge, nodes)   # call function to generate weighted graph with the number of edges
 
             # call function to run all algorithms
             (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list, p_alg_dict, p_alg_edges_list,
@@ -164,7 +163,7 @@ def compare():
         return (k_alg_dict, k_alg_edges_list, k_alg_time_list, k_alg_queue_dict, k_alg_edges_queue_list, k_alg_time_queue_list,
         p_alg_dict, p_alg_edges_list, p_alg_time_list, p_alg_queue_dict, p_alg_edges_queue_list, p_alg_time_queue_list)
 
-    # find moving average
+    # find moving average, store as a list
     def moving_average(time_list, window_size = cfg.window_size):
         moving_averages_list = pd.Series(time_list).rolling(window_size).mean().tolist()
         return moving_averages_list
